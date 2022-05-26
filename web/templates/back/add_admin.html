@@ -1,0 +1,115 @@
+{% extends "back/app.html" %}
+{% block title%}Add New Staff | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Add New Staff</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'a_admins' %}">Staffs</a></li>
+                    <li class="breadcrumb-item active">Add New Staff</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Create New Staff</h4>
+                <p class="card-title-desc">Please becareful </p>
+            </div>
+            <div class="card-body">
+                <form class="needs-validation add_staff" novalidate>
+                {% csrf_token %}
+                <input type="hidden" value="True" name="is_staff">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom01">First name</label>
+                                <input type="text" class="form-control" name="first_name" id="validationCustom01" placeholder="First name" required>
+                                <div class="invalid-feedback">
+                                    Enter User First Name
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom02">Last name</label>
+                                <input type="text" class="form-control" name="last_name" id="validationCustom02" placeholder="Last name" required>
+                                <div class="invalid-feedback">
+                                    Enter User Last Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom03">Username</label>
+                                <input type="text" class="form-control" name="username" id="validationCustom03" placeholder="Username" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid username.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom04">E-Mail</label>
+                                <input type="email" class="form-control" name="email" id="validationCustom04" placeholder="Email" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid Email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom05">Mobile Number</label>
+                                <input type="text" class="form-control" name="mobile" id="validationCustom05" placeholder="Mobile Number" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid mobile number.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom01">Staff Role</label>
+                                <select class="form-select" name="staff_role" id="validationCustom01" required>
+                                    <option disabled selected>Select Role</option>
+                                    <option value="Gold">Gold</option>
+                                    <option value="E-Pin">E-Pin/Card Staff</option>
+                                    <option value="Commission">Points & Commissionns</option>
+                                    <option value="Cash">Funds</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom02">Password</label>
+                                <input type="text" class="form-control passwordX" name="password" id="passwordX" placeholder="Password" required>
+                                <div class="invalid-feedback">
+                                    Enter User Last Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Create Staff</button>
+                    <button type="button" onclick="gen_password();" class="btn btn-outline-info">Generate Password</button>
+                    <button type="button" onclick="copy_password();" class="btn btn-outline-danger passw" style="display: none;">Copy Password</button>
+                </form>
+            </div>
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>
+{% endblock app %}

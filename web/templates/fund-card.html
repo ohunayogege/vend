@@ -1,0 +1,93 @@
+{% extends "app.html" %}
+
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Fund Wallet</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Fund Wallet With Card</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body justify-content-center text-center bg-soft-primary">
+                <h2 class="text-center">Fund account with Monnify(ATM / BANK TRANSFER) </h2><br>
+                    <form class="col-12" id="payfund" method="POST" autocomplete="off">
+                        {% csrf_token %}
+                        {% comment %} <div id="output" class="text-center font-weight-600 uppercase hide alert"></div> {% endcomment %}
+                        
+                        <div class="form-group">
+                            <label for="amount">Amount To Recharge</label>
+                            <input type="text" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control amount_topup" name="amount" placeholder="100" required>
+                            <input type="hidden" class="form-control amount_charges" value="{{website.card_charges}}">
+                        </div>
+                        <div class="container">
+
+                        <p>Fee</a> <span class="price" id='charge'></span></p>
+
+                        <hr>
+                        <p>Transaction Charge <span class="price" style="color:black" id='printchatbox' ><b></b></span></p>
+                        </div>
+                        <div class="container justify-content-center align-items-center">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light w-100">Make Payment</button>
+                        </div>
+                    </form>
+                    <center><img  src="https://app.monnify.com/images/logo.svg" height="80px" width ="100px"></center>
+        </div>
+    </div>
+
+    <div class="col-md-6 card bg-soft-info">
+        <h2 class="text-center card-title pt-3">Manual Funding </h2><br>
+        <div class="card-body">
+            <p>
+                Make Deposit or Transfer into any of the below BANK ACCOUNT and forward the proof of payment on WhatsApp for our 
+                moderator to confirm your transaction and fund your wallet.
+            </p>
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Bank Detail</h5>
+
+                <div class="row card_ay bg-primary">
+                    <div class="card__front card__part">
+                    {% if website.website_icon %}
+                        <img src="{{website.website_icon.url}}" alt="logo" class="card__front-square card__square">
+                        {% else %}
+                        <img src="/static/images/logo.svg" alt="logo" class="card__front-square card__square">
+                        {% endif %}
+                        {% if website.website_logo %}
+                        <img class="card__front-logo card__logo" src="{{website.website_logo.url}}" alt="logo">
+                        {% else %}
+                        <img class="card__front-logo card__logo" src="/static/images/logo.svg" alt="logo">
+                        {% endif %}
+                        
+                        <p class="card_numer">{{website.account_number}}</p>
+                        <div class="card__space-75">
+                        <span class="card__label">Bank</span>
+                        <p class="card__info">{{website.bank_name}}</p>
+                        </div>
+                        <div class="card__space-25">
+                        <span class="card__label">Account Name</span>
+                        <p class="card__info">{{website.account_name}}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>                             
+</div>
+{% endblock body %}

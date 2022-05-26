@@ -1,0 +1,63 @@
+{% extends "back/app.html" %}
+{% block title%}Contact List | {{ website.website_name }}{% endblock title %}
+{% block app %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">All Contacts</h4>
+                <p class="card-title-desc">
+                <div class="row mb-4">
+                <div class="col-4">
+                    
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'a_contact' %}" class="btn btn-info">Add New Contact</a>
+                </div>
+                <div class="col-4"></div>
+                </div>
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Name</th>
+                        <th>Contact Link</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for u in contacts %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{u.name}}</td>
+                        <td>{{u.whatsapp_link}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="{% url 'a_del_contact' u.pk %}">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+
+{% endblock app %}

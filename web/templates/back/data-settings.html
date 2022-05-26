@@ -1,0 +1,254 @@
+{% extends "back/app.html" %}
+{% block title%}Product Settings | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Product Configuration</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Product Settings</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                {% comment %} <h4 class="card-title">Textual inputs</h4>
+                <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
+                    textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> {% endcomment %}
+            </div>
+            <div class="card-body p-4">
+                <form class="product_config">
+                {% csrf_token %}
+                    <div class="row">
+                        <h4 class="card-title">Data Settings</h4>
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="mtn_sme_is_active" id="customSwitchsizelg" {% if pro.mtn_sme_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">MTN SME</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="mtn_gifting_is_active" id="customSwitchsizelg" {% if pro.mtn_gifting_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">MTN GIFTING</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="mtn_cg_is_active" id="customSwitchsizelg" {% if pro.mtn_cg_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">MTN Corporate Gifting</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="airtel_cg_is_active" id="customSwitchsizelg" {% if pro.airtel_cg_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">Airtel Corporate Gifting</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="airtel_gifting_is_active" id="customSwitchsizelg" {% if pro.airtel_gifting_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">Airtel Gifting</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="glo_gifting_is_active" id="customSwitchsizelg" {% if pro.glo_gifting_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">Glo Gifting</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="etisalat_gifting_is_active" id="customSwitchsizelg" {% if pro.etisalat_gifting_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">9mobile Gifting</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h4 class="card-title mt-3">Bills Settings</h4>
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="dstv_is_active" id="customSwitchsizelg" {% if pro.dstv_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">DSTV</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="gotv_is_active" id="customSwitchsizelg" {% if pro.gotv_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">GOTV</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="startimes_is_active" id="customSwitchsizelg" {% if pro.startimes_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">Startimes</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                    <input type="checkbox" class="form-check-input" name="disco_is_active" id="customSwitchsizelg" {% if pro.disco_is_active %} checked{% else %}unchecked{% endif%}>
+                                    <label class="form-check-label" for="customSwitchsizelg">Disco</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {% comment %} <div class="row">
+                        <h4 class="card-title mt-4">TV Decoder</h4>
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Customer Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.decoder}}" name="decoder" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reseller Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.decoder_res}}" name="decoder_res" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Vendor Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.decoder_ven}}" name="decoder_ven" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">API Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.decoder_api}}" name="decoder_api" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div> {% endcomment %}
+
+                    {% comment %} <div class="row">
+                        <h4 class="card-title mt-4">Smile Direct</h4>
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Customer Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.smile}}" name="smile" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reseller Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.smile_res}}" name="smile_res" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Vendor Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.smile_ven}}" name="smile_ven" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">API Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.smile_api}}" name="smile_api" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div> {% endcomment %}
+                    <div class="row text-center">
+                        <div class="col-md-10 text-center">
+                            <button type="submit" class="btn btn-info btn-lg save_config">Save Changes</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock app %}

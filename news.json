@@ -1,0 +1,249 @@
+[
+{
+  "model": "backbone.websiteconfig",
+  "pk": 1,
+  "fields": {
+    "website_name": "Prudent Core NG",
+    "website_title": "We meeuve",
+    "website_email": "prudentcoreng@gmail.com",
+    "whatsapp_number": "08149983395",
+    "website_logo": "logo/softgist-top.png",
+    "website_icon": "icon/d.png",
+    "about_website": "A technology driven platform that offers solutions to digital needs at best possible price without compromising quality.",
+    "website_location": "Lagos, Nigeria",
+    "prefix": "Prudent",
+    "bank_name": "Wema Bank",
+    "account_name": "Prudent Core NG",
+    "account_number": "0800379373",
+    "facebook_link": "https://facebook.com/prudentcoreng",
+    "instagram_link": "https://instagram.com/prudentcoreng",
+    "whatsapp_link": "https://facebook.com/prudentcoreng",
+    "twitter_link": "https://twitter.com/prudentcoreng",
+    "transfer_charges": "50.00",
+    "card_charges": "0.015",
+    "min_bonus_transfer": "0.00",
+    "reseller_price": "2000.00",
+    "whatsapp_group_link": "https://twitter.com/prudentcoreng",
+    "seo_description": "Lorem Ipsum",
+    "seo_keywords": "Bills,Payments,Data,VTU,MTN"
+  }
+},
+{
+  "model": "backbone.apisetting",
+  "pk": 1,
+  "fields": {
+    "monnify_secret_key": "G4HEJRX5F9EXM3X2GCJYDCV3SCSDCU7J",
+    "monnify_api_key": "MK_TEST_CZ47ZYPEXR",
+    "monnify_contract_code": "990220110619",
+    "vtu_key": "73r3fry363"
+  }
+},
+{
+  "model": "backbone.airtimetocashcalc",
+  "pk": 1,
+  "fields": {
+    "glo": "85.00",
+    "glo_number": "08118175493",
+    "mtn": "80.00",
+    "mtn_number": "08136902035",
+    "airtel": "75.00",
+    "airtel_number": "08149983395",
+    "etisalat": "65.00",
+    "etisalat_number": "08091234567",
+    "notification_number": "08149983395"
+  }
+},
+{
+  "model": "backbone.datacommission",
+  "pk": 1,
+  "fields": {
+    "mtn": "1.00",
+    "mtn_api": "0.00",
+    "mtn_res": "2.00",
+    "glo": "0.00",
+    "glo_api": "0.00",
+    "glo_res": "2.00",
+    "airtel": "0.00",
+    "airtel_api": "0.00",
+    "airtel_res": "0.00",
+    "etisalat": "0.00",
+    "etisalat_api": "0.00",
+    "etisalat_res": "0.00"
+  }
+},
+{
+  "model": "backbone.datasetting",
+  "pk": 1,
+  "fields": {
+    "mtn_sme_is_active": true,
+    "mtn_gifting_is_active": true,
+    "mtn_cg_is_active": true,
+    "airtel_gifting_is_active": true,
+    "airtel_cg_is_active": true,
+    "glo_gifting_is_active": true,
+    "etisalat_gifting_is_active": true,
+    "dstv_is_active": true,
+    "gotv_is_active": true,
+    "startimes_is_active": true,
+    "disco_is_active": true
+  }
+},
+{
+  "model": "backbone.airtimecommission",
+  "pk": 1,
+  "fields": {
+    "mtn": "2.00",
+    "mtn_api": "0.00",
+    "mtn_res": "10.00",
+    "glo": "0.00",
+    "glo_api": "0.00",
+    "glo_res": "13.00",
+    "airtel": "0.00",
+    "airtel_api": "0.00",
+    "airtel_res": "0.00",
+    "etisalat": "0.00",
+    "etisalat_api": "0.00",
+    "etisalat_res": "0.00"
+  }
+},
+{
+  "model": "backbone.billscommission",
+  "pk": 1,
+  "fields": {
+    "decoder": "0.00",
+    "decoder_api": "0.00",
+    "decoder_res": "2.35",
+    "edc": "0.00",
+    "edc_api": "0.00",
+    "edc_res": "2.00",
+    "smile": "0.00",
+    "smile_api": "0.00",
+    "smile_res": "2.00"
+  }
+},
+{
+  "model": "backbone.ecardsettings",
+  "pk": 1,
+  "fields": {
+    "waec_price_users": "14000.00",
+    "waec_price_res": "13900.00",
+    "waec_price_api": "13000.00",
+    "neco_price_users": "11000.00",
+    "neco_price_res": "10500.00",
+    "neco_price_api": "9800.00",
+    "mtn_discount_users": "0.00",
+    "mtn_discount_res": "0.00",
+    "mtn_discount_api": "0.00",
+    "airtel_discount_users": "0.00",
+    "airtel_discount_res": "0.00",
+    "airtel_discount_api": "0.00",
+    "glo_discount_users": "0.00",
+    "glo_discount_res": "0.00",
+    "glo_discount_api": "0.00",
+    "etisalat_discount_users": "0.00",
+    "etisalat_discount_res": "0.00",
+    "etisalat_discount_api": "0.00"
+  }
+},
+{
+  "model": "backbone.referralsystem",
+  "pk": 1,
+  "fields": {
+    "referral_bonus": "1.02",
+    "status": false
+  }
+},
+{
+  "model": "backbone.announcement",
+  "pk": 1,
+  "fields": {
+    "title": "All of it",
+    "message": "Here are examples of .form-control applied to each textual HTML5 type.",
+    "popup": false,
+    "date": "2022-04-26T23:33:04.227Z"
+  }
+},
+{
+  "model": "backbone.announcement",
+  "pk": 2,
+  "fields": {
+    "title": "Notification",
+    "message": "We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv &amp; Startimes), Electricity Bill Payment and Airtime to CASH. PLEASE USE Moniepoint OR WEMA BANK ACCOUNT NUMBERS ON YOUR DASHBOARD INSTANT FUNDING. THANKS",
+    "popup": false,
+    "date": "2022-04-26T23:37:18.209Z"
+  }
+},
+{
+  "model": "backbone.announcement",
+  "pk": 3,
+  "fields": {
+    "title": "Lorem",
+    "message": "Lorem Ipsum Dolor Hifyebfe eiagfe UGyehfb Kiuubeye",
+    "popup": true,
+    "date": "2022-05-07T10:51:13.834Z"
+  }
+},
+{
+  "model": "store.cablelist",
+  "pk": 1,
+  "fields": {
+    "decoder": "DSTV",
+    "slug": "dstv",
+    "active": true
+  }
+},
+{
+  "model": "store.cablelist",
+  "pk": 2,
+  "fields": {
+    "decoder": "GOTV",
+    "slug": "gotv",
+    "active": true
+  }
+},
+{
+  "model": "store.cablelist",
+  "pk": 3,
+  "fields": {
+    "decoder": "Startimes",
+    "slug": "startimes",
+    "active": true
+  }
+},
+{
+  "model": "store.networklist",
+  "pk": 1,
+  "fields": {
+    "network": "MTN",
+    "slug": "mtn",
+    "active": true
+  }
+},
+{
+  "model": "store.networklist",
+  "pk": 2,
+  "fields": {
+    "network": "9mobile",
+    "slug": "9mobile",
+    "active": true
+  }
+},
+{
+  "model": "store.networklist",
+  "pk": 3,
+  "fields": {
+    "network": "GLO",
+    "slug": "glo",
+    "active": true
+  }
+},
+{
+  "model": "store.networklist",
+  "pk": 4,
+  "fields": {
+    "network": "Airtel",
+    "slug": "airtel",
+    "active": true
+  }
+}
+]

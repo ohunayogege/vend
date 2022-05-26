@@ -1,0 +1,158 @@
+{% extends "back/app.html" %}
+{% block title%}Update {{u.username|capfirst}}'s Profile | {{ website.website_name }}{% endblock title %}
+{% load humanize %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Update {{u.username|capfirst}}'s Profile</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">User Update</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+<div class="col-md-6">
+        <div class="card card-body justify-content-center text-center" style="background: #ccc; mt-4">
+            <h2 class="text-center">Update User Profile </h2><br>
+            <form class="col-12 user_update" id="user_update" method="POST">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" name="action" value="profile">
+
+
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">First Name</label>
+                        <input type="text" class="form-control account_number" name="first_name" value="{{u.first_name}}" required>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">Last Name</label>
+                        <input type="text" class="form-control account_number" name="last_name" value="{{u.last_name}}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">Mobile Number</label>
+                        <input type="text" class="form-control account_number" name="mobile" value="{{u.mobile}}" required>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">Email</label>
+                        <input type="text" class="form-control account_number" name="email" value="{{u.email}}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">Bank Name</label>
+                        <input type="text" class="form-control account_number" name="bank_name" value="{{u.bank_name}}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">Account Number</label>
+                        <input type="text" class="form-control account_number" name="account_number" value="{{u.account_number}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">Account Name</label>
+                        <input type="text" class="form-control account_number" name="account_name" value="{{u.account_name}}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="amount">User Type</label>
+                        <select name='user_type' class='form-control user_type' required>
+                        {% if u.user_type == 'customer' %}
+                            <option value="customer" selected>Regular</option>
+                            <option value="reseller">Reseller</option>
+                            {% comment %} <option value="api">API</option> {% endcomment %}
+                        {% elif u.user_type == 'reseller' %}
+                            <option value="reseller" selected>Reseller</option> 
+                            <option value="customer">Regular</option>
+                            {% comment %} <option value="api">API</option> {% endcomment %}
+                        {% endif %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+                <div class="container justify-content-center align-items-center mt-4">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 update_profile">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% comment %} <div class="col-md-6">
+        <div class="card card-body justify-content-center text-center" style="background: #ccc; mt-4">
+            <h2 class="text-center">Kindly Change Your Transaction Pin </h2><br>
+            <form class="col-12 text-center" id="transaction_pin" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="amount">New Pin*</label>
+                    <input type="hidden" class="form-control" name="action" value="pin">
+                    <input type="password" maxlength="4" class="form-control new_pin" name="new_pin" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Password*</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 update_pin">Update PIN</button>
+                </div>
+            </form>
+        </div>
+    </div> {% endcomment %}
+    <div class="col-md-6">
+        <div class="card card-body justify-content-center text-center" style="background: #ccc; mt-4">
+            <h2 class="text-center">Generate New Password </h2><br>
+            <form class="col-12 change_password2" id="change_password">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" name="action" value="password">
+
+                <div class="form-group">
+                    <label for="amount">New Password*</label>
+                    <input type="text" class="form-control passwordX" id="passwordX" name="new_password" required>
+                </div>
+
+                <div class="container justify-content-center align-items-center text-center">
+                <div class="row text-center mt-3">
+                    <div class="col-sm-6 col-md-6 col-lg-12 mb-2">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light mx-4 update_password">Update Password</button>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-12 mb-2">
+                    <button type="button" onclick="gen_password();" class="btn btn-info waves-effect waves-light">Generate Password</button>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-12 mb-2">
+                    <button type="button" onclick="copy_password();" class="btn btn-info waves-effect waves-light passw" style="display: none">Copy Password</button>
+                    </div>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock app %}

@@ -1,0 +1,99 @@
+{% extends "back/app.html" %}
+{% load humanize %}
+{% block app %}
+
+<div class="row">
+<div class="col-md-6">
+    <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+        <div>
+            
+        </div>
+        <div>
+            <button type="button" class="btn btn-info waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-centerAdd"><i class="bx bx-plus me-1"></i> Add New</button>
+            {% comment %} <a href="{% url 'e_card_set' %}" class="btn btn-info"><i class="bx bx-plus me-1"></i> Add New</a> {% endcomment %}
+        </div>
+        <div class="modal fade bs-example-modal-centerAdd" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Announcement</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="announcementNew">
+                    {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="form-floating mb-3 mb-lg-0">
+                                <input type="text" name="title" class="form-control" id="floatingInput" placeholder="Announcement Title">
+                                <label for="floatingInput">Announcement Title</label>
+                            </div>
+
+                            <div class="form-floating mb-3 mb-lg-0 mt-3">
+                                <textarea name="message" class="form-control" id="floatingInput" placeholder="Content"></textarea>
+                                <label for="floatingInput">Content</label>
+                            </div>
+
+                            <div class="form-floating mb-3 mb-lg-0 mt-3">
+                                <select name="popup" class="form-control" id="floatingInput" required>
+                                    <option disabled selected>Choose an Option</option>
+                                    <option value="True">Yes</option>
+                                    <option value="False">No</option>
+                                </select>
+                                <label for="floatingInput">Appear in Popup</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Create</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+    </div>
+
+</div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">All Announcements</h4>
+                <p class="card-title-desc">
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for u in anns %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{u.title}}</td>
+                        <td>{{u.message|truncatechars_html:150|safe}}</td>
+                        <td>
+                            <a href="{% url 'a_ann_del' u.pk %}" class="btn btn-danger font-size-16 shadow-none py-2 text-white">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+
+{% endblock app %}

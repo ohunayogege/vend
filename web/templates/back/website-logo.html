@@ -1,0 +1,66 @@
+{% extends "back/app.html" %}
+{% block title%}Website Logo-Icon | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Website Logo/Icon</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Website Logo/Icon</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="mb-5">
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="Image" class="form-label">Upload Website Logo</label>
+            <input type="hidden" value="image" name="upload_type">
+            <input class="form-control" name="image-logo" type="file" accept="image/png" id="logo-image" onchange="preview()">
+            <div class="form-group">
+                <button onclick="clearImage()" type="button" class="btn btn-primary mt-3">Clear Image</button>
+                <button type="submit" class="btn btn-primary mt-3 upload-logo">Save Changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <img id="logo_frame" src="" class="img-fluid text-center" />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="mb-5">
+            <form method="POST" enctype="multipart/form-data">
+                {% comment %} <input type="hidden" value="{{csrf_token}}" id="csrf"> {% endcomment %}
+                {% csrf_token %}
+                <label for="Image" class="form-label">Upload Website Icon</label>
+                <input type="hidden" value="icon" name="upload_type">
+                <input class="form-control" name="image-icon" type="file" accept="image/png" id="icon-image" onchange="previewIcon()">
+                <div class="form-group">
+                    <button onclick="clearIcon()" type="button" class="btn btn-primary mt-3">Clear Image</button>
+                    <button type="submit" class="btn btn-primary mt-3 upload-icon">Save Changes</button>
+                </div>
+            <form>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <img id="icon_frame" src="" class="img-fluid text-center" />
+    </div>
+</div>
+
+{% endblock app %}

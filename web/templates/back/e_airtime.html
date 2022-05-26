@@ -1,0 +1,68 @@
+{% extends "back/app.html" %}
+{% block title%}E-Cards | {{ website.website_name }}{% endblock title %}
+{% load humanize %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">E-Cards</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">E-Airtime</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="container w-50 h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <h2 class="text-center">Add A New Airtime Pin </h2><br>
+            <form class="col-12 e_airtime" id="e_airtime" method="POST">
+            {% comment %} <input type="hidden" name="service" value="pay"> {% endcomment %}
+                {% csrf_token %}
+                {% comment %} <input type="hidden" class="form-control csrf" id="csrf" name="csrf" value="{{csrf_token}}"> {% endcomment %}
+                
+                <div class="mb-3">
+                    <label class="form-label">Network</label>
+                    <select name="network" class="form-control">
+                        <option disabled selected>-- Select Network --</option>
+                        <option value="MTN">MTN</option>
+                        <option value="GLO">GLO</option>
+                        <option value="Airtel">Airtel</option>
+                        <option value="9mobile">9mobile</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Denomination</label>
+                    <select name="denomination" class="form-control">
+                        <option disabled selected>-- Select Denomination --</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                    </select>
+                </div>
+
+                <div class="form-floating mb-3 mb-lg-0">
+                    <input type="text" name="pins" class="form-control" id="floatingInput" placeholder="6772482742745272,7447548174518,445167416353">
+                    <label for="floatingInput">Enter Pins, Separate by commas</label>
+                </div>
+                <div class="container justify-content-center align-items-center text-center mt-3">
+                    <button type="submit" class="btn btn-info btn-lg addPin">Add Pin<sup>s</sup></button>
+                </div>
+                {% comment %} <div class="text-center pt-4"><span id="img_loader"></span></div> {% endcomment %}
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+{% endblock app %}

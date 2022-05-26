@@ -1,0 +1,76 @@
+{% extends "app.html" %}
+{% load humanize %}
+{% block title%}Wallet History | {{ website.website_name }}{% endblock title %}
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Wallets</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Wallet Transactions</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Transactions</h4>
+                <p class="card-title-desc">
+                    Here you see all your wallet history
+                </p>
+
+                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Reference</th>
+                        <th>Service</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Fee</th>
+                        <th>Balance Before</th>
+                        <th>Balance After</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    {% for tr in wallets %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            {{ tr.reference }}
+                        </td>
+                        <td>{{tr.method}}</td>
+                        <td>{{ tr.trans_type }}</td>
+                        <td>₦{{ tr.amount|intcomma}}</td>
+                        <td>₦{{ tr.fee|intcomma}}</td>
+                        <td>₦{{ tr.amount_before|intcomma}}</td>
+                        <td>₦{{ tr.amount_after|intcomma}}</td>
+                        <td class="alert alert-{% if tr.status == 'success' %}success{%elif tr.status == 'failed'%}danger{% else %}warning{%endif%}">
+                            {{tr.status|capfirst}}
+                        </td>
+                        <td>{{tr.date}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+{% endblock body %}

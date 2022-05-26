@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title%}Authentication | {{ website.website_name }}{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Prudent Core NG" name="author" />
+        <!-- App favicon -->
+        {% if website.website_icon %}
+        <link rel="shortcut icon" href="{{website.website_icon.url}}">
+        {% else %}
+        <link rel="shortcut icon" href="/static/images/favicon.ico">
+        {% endif %}
+
+        <!-- Bootstrap Css -->
+        <link href="/static/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="/static/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="/static/css/custom.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body>
+        <div class="home-btn d-none d-sm-block">
+            <a href="{% url 'home' %}" class="text-dark"><i class="fas fa-home h2"></i></a>
+        </div>
+
+    {% block auth %}
+    
+    {% endblock auth %}
+
+
+    <script src="/static/libs/jquery/jquery.min.js"></script>
+    <script src="/static/js/lga.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/custom.js"></script>
+    </body>
+</html>

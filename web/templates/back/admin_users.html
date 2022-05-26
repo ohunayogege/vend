@@ -1,0 +1,75 @@
+{% extends "back/app.html" %}
+{% block title%}All Staffs | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">{{website.website_name}}' Staffs</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">All Staffs</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row align-items-center">
+    <div class="col-md-6">
+        <div class="mb-3 text-white">
+            <h5 class="card-title text-white">Total Staffs <span class="text-white fw-normal ms-2">({{users|length}})</span></h5>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+        {% if user.staff_type == 'Gold' %}
+            <div>
+                <a href="{% url 'a_new_staff' %}" class="btn btn-info"><i class="bx bx-plus me-1"></i> Add New Staff</a>
+            </div>
+        {% endif %}
+        </div>
+
+    </div>
+</div>
+<!-- end row -->
+
+
+<div class="row">
+    
+    {% for u in users %}
+    <div class="col-xl-3 col-sm-6">
+        <div class="card text-center">
+            <div class="card-body">
+                
+                
+                <div class="avatar-xl mx-auto mb-4">
+                    <div class="avatar-title bg-soft-info text-primary display-4 m-0 rounded-circle">
+                        {{u.username.0|capfirst}}
+                    </div>
+                </div>
+                <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ u.first_name|capfirst }} {{ u.last_name|capfirst }}</a></h5>
+                <p class="text-muted mb-2">Office of {{u.staff_type}}</p>
+                
+            </div>
+
+            <div class="btn-group" role="group">
+            {% if user.staff_type == 'Gold' %}
+                <a href="{% url 'a_del_staff' u.username %}" class="btn btn-danger text-truncate"><i class="uil uil-envelope-alt me-1"></i> Delete</a>
+            {% endif %}
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    {% endfor %}
+    
+</div>
+<!-- end row -->
+
+{% endblock app %}

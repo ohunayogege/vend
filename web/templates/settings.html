@@ -1,0 +1,114 @@
+{% extends "app.html" %}
+
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Settings</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Account Settings</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+{% if user.bank_set %}
+    <div class="col-md-6">
+        <div class="card card-body justify-content-center text-center bg-soft-info">
+            <h2 class="text-center">Payout Bank Account </h2><br>
+            <form class="col-12" id="bank_update" method="POST">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" name="action" value="bank">
+
+                <div class="form-group">
+                    <label for="amount">Selected Bank</label>
+                    <input type="text" class="form-control" value="{{user.bank_name}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Account Number*</label>
+                    <input type="text" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control" value="{{user.account_number}}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Account Name*</label>
+                    <input type="text" class="form-control" value="{{user.account_name}}" readonly>
+                </div>
+
+                <div class="container justify-content-center align-items-center">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-6">
+        <div class="card card-body justify-content-center text-center bg-soft-info">
+            <h2 class="text-center">Payout Bank Account </h2><br>
+            <form class="col-12" id="bank_update" method="POST">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" name="action" value="bank">
+
+                <div class="form-group">
+                    <label for="amount">Choose Bank</label>
+                    <select class="form-control bank" name="bank_name" required>
+                        <option selected disabled>-- Select Bank --</option>
+                        {% for b in banks %}
+                            <option value='{{b.name}}' data-slug='{{ b.slug }}' data-code="{{b.code}}">{{ b.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Account Number*</label>
+                    <input type="text" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control account_number" name="account_number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Account Name*</label>
+                    <input type="text" class="form-control account_name" name="account_name" readonly>
+                </div>
+
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 update_password">Update Bank</button>
+                </div>
+                <div class="text-center pt-4"><span id="img_loader"></span></div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-md-6">
+        <div class="card card-body justify-content-center text-center bg-soft-info">
+            <h2 class="text-center">Change Password </h2><br>
+            <form class="col-12" id="change_password" method="POST">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" name="action" value="password">
+
+                <div class="form-group">
+                    <label for="amount">Old Password*</label>
+                    <input type="password" class="form-control" name="old_password" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">New Password*</label>
+                    <input type="password" class="form-control" name="new_password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Confirm New Password*</label>
+                    <input type="password" class="form-control" name="new_password_2" required>
+                </div>
+
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 update_password">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

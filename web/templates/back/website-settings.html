@@ -1,0 +1,255 @@
+{% extends "back/app.html" %}
+{% block title%}Website Settings | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Website Configuration</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Website Details</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Update Website Configuration</h4>
+            </div>
+            <div class="card-body p-4">
+                <form class="website_config">
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Website Name</label>
+                                    <input class="form-control" type="text" value="{{website.website_name}}" name="website_name" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Website Title</label>
+                                    <input class="form-control" type="text" value="{{website.website_title}}" name="website_title">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Website Email</label>
+                                    <input class="form-control" type="email" value="{{website.website_email}}" name="website_email" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">WhatsApp Number</label>
+                                    <input class="form-control" type="text" value="{{website.whatsapp_number}}" name="whatsapp_number" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Website About</h4>
+                                    <p class="card-title-desc">About Website</p>
+                                </div>
+                                <div class="card-body">
+                                    <textarea name="about_website" class="form-control" value="{{website.about_website}}">{{website.about_website}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Business Location/Address</label>
+                                    <input class="form-control" type="text" value="{{website.website_location}}" name="business_address" required>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reference Prefix (PC)</label>
+                                    <input class="form-control" type="text" value="{{website.prefix}}" name="prefix" required>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Bank Transfer Charges</label>
+                                    <input class="form-control" type="text" value="{{website.transfer_charges}}" name="transfer_charges">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Card Charges</label>
+                                    <input class="form-control" type="text" value="{{website.card_charges}}" name="card_charges">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Minimum Bonus Transfer</label>
+                                    <input class="form-control" type="text" value="{{website.min_bonus_transfer}}" name="min_bonus_transfer">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reseller Price</label>
+                                    <input class="form-control" type="text" value="{{website.reseller_price}}" name="reseller_price">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Whatsapp Group Link</label>
+                                    <input class="form-control" type="text" value="{{website.whatsapp_group_link}}" name="whatsapp_group_link">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Bank Name</label>
+                                    <input class="form-control" type="text" value="{{website.bank_name}}" name="bank_name">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Account Name</label>
+                                    <input class="form-control" type="text" value="{{website.account_name}}" name="account_name">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Account Number</label>
+                                    <input class="form-control" type="text" value="{{website.account_number}}" name="account_number">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Facebook Link</label>
+                                    <input class="form-control" type="url" value="{{website.facebook_link}}" name="facebook_link">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Twitter Link</label>
+                                    <input class="form-control" type="url" value="{{website.twitter_link}}" name="twitter_link">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Instagram</label>
+                                    <input class="form-control" type="url" value="{{website.instagram_link}}" name="instagram_link">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">WhatsApp Link</label>
+                                    <input class="form-control" type="url" value="{{website.whatsapp_link}}" name="whatsapp_link" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="col-md-10 text-center">
+                            <button type="submit" class="btn btn-info btn-lg save_config">Save Changes</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock app %}

@@ -1,0 +1,65 @@
+{% extends "back/app.html" %}
+{% load humanize %}
+{% block app %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">All Wallet Transactions</h4>
+                <p class="card-title-desc">
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Reference</th>
+                        <th>User</th>
+                        <th>Transaction</th>
+                        <th>Amount</th>
+                        <th>Fee</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for u in transactions %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>
+                            <a href="{% url 'a_wallettransactions_det' u.reference %}">{{u.reference}}</a>
+                        </td>
+                        <td>{{u.user.username}}</td>
+                        <td>{{u.trans_type}}</td>
+                        <td>₦{{u.amount|intcomma}}</td>
+                        <td>₦{{u.fee|intcomma}}</td>
+                        <td class="alert alert-{% if u.status == 'success'%}success{%elif u.status == 'failed'%}danger{% else %}warning{%endif%}">
+                            {{u.status|capfirst}}
+                        </td>
+                        <td>{{u.date}}</td>
+                        <td>
+                            {% if user.staff_type == 'Gold' %}
+                            <a href="{% url 'a_wallet_del' u.reference %}" class="btn btn-danger font-size-16 shadow-none py-2 text-white">
+                                Delete
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+
+{% endblock app %}

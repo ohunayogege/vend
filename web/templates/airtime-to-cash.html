@@ -1,0 +1,174 @@
+{% extends "app.html" %}
+{% load humanize %}
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Airtime Funding/ Airtime to Cash</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Airtime To Cash</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-lg-8 col-xl-6">
+        <div class="card card-body justify-content-center text-center bg-soft-primary">
+            <h2 class="text-center">AIRTIME FUNDING/ AIRTIME TO CASH </h2><br>
+            <form class="col-12" id="airtimeCash" autocomplete="off">
+                {% csrf_token %}
+                <input type="hidden" value="{{ csrf_token }}" id="csrf">
+                <input type="hidden" class="form-control a2cm" value="{{a2c.mtn_number}}">
+                <input type="hidden" class="form-control a2cmp" value="{{a2c.mtn}}">
+                <input type="hidden" class="form-control a2cg" value="{{a2c.glo_number}}">
+                <input type="hidden" class="form-control a2cgp" value="{{a2c.glo}}">
+                <input type="hidden" class="form-control a2ca" value="{{a2c.airtel_number}}">
+                <input type="hidden" class="form-control a2cap" value="{{a2c.airtel}}">
+                <input type="hidden" class="form-control a2c9" value="{{a2c.etisalat_number}}">
+                <input type="hidden" class="form-control a2c9p" value="{{a2c.etisalat}}">
+                <div class="form-group">
+                    <label for="amount">Select Network</label>
+                    <select class="form-control network" name="network" required>
+                        <option selected disabled>-- Select Network --</option>
+                        <option value="mtn">MTN</option>
+                        <option value="glo">GLO</option>
+                        <option value="airtel">Airtel</option>
+                        <option value="etisalat">9mobile</option>
+                    </select>
+                </div>
+
+                <div class="form-group mobile-selection">
+                    <label for="amount">Mobile Number*</label>
+                    <input type="tel" class="form-control mobile_number" name="mobile_number" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" required>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Amount</label>
+                    <input type="text" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control amount" name="amount" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Fund Type</label>
+                    <select class="form-control fund" name="fund-type" required>
+                        <option disabled selected>Please Choose</option>
+                        <option value="Fund Wallet">Fund Wallet</option>
+                        <option value="Bank Transfer">Transfer To Bank</option>
+                    </select>
+                </div>
+
+                {% comment %}  {% endcomment %}
+
+                <div class="form-group amt-selection">
+                    <label for="amount">You Will Receive</label>
+                    <input type="text" class="form-control send-amount" name="send-amount" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Bank Name</label>
+                    <input type="text" class="form-control" value="{{ user.bank_name }}" name="bank_name" readonly>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Account Number</label>
+                    <input type="text" class="form-control" value="{{ user.account_number }}" name="account_number" readonly>
+                </div>
+
+                
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 proceed">Proceed</button>
+                </div>
+            </form>
+
+            <div class="mt-4">
+            <p class="text-danger">NB: We do not accept airtime from Banks or any other means aside from using the code which we will be providing you. We won't credit you.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="processModal" tabindex="-1" role="dialog" aria-labelledby="processModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <center><h4 class="modal-title" id="processModalLongTitle"> To complete this request, follow the instructions below.</h4></center>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <h5 class='w3-text-blue  w3-padding' id="instruction"> </h5>
+        </p>
+        <hr>
+        <p id ="opt1"> </p>
+
+        <p id ="opt2"> </p>
+ <b>Create Pin:</b>
+
+        <p id ="opt3"> </p>
+
+<span>Transfer through <b>Transfer Code:</b></span>
+        <p id ="opt4"> </p>
+
+          </p>
+
+        <p><b>NOTE: Ensure you have paid N  into the Number above before clicking on airtime sent. Also, you must send exactly <span id="amtm"></span> Airtime within 30 minutes or this transaction will be cancelled.</b></p>
+        <P><b>NOTE: Confirmation is instant and payment is automated usually within 5-30mins.<br>Also note that to send to us, you need to send from your personal sim .</p>
+
+          <p style="color:red;" class="blink_me"><b>NOTE: Click on comfirmation button without send the airtime can lead to your account and email been banned.</b></p>
+      </div>
+        <div class="modal-footer">
+                <button type="submit" class="btn btn-info process" onclick="SubmitAirtime();">COMFIRM AIRTIME SENT</button>
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+           </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body text-center">
+        <div class="thank-you-pop">
+          <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+          <h1>Thank You!</h1>
+          <p>Your request is received and we will process it shortly</p>
+
+         </div>
+         <center>
+           <a href="{% url 'home' %}" class="btn btn-info">Continue</a>
+         </center>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body text-center">
+        <div class="thank-you-pop">
+          <img src="https://www.pngmart.com/files/10/Stop-Sign-Transparent-Background.png" alt="">
+          <p id ="errmessage" style="font-size: 20px;"></p>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+
+         </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+{% endblock body %}

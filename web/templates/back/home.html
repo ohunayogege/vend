@@ -1,0 +1,1451 @@
+{% extends "back/app.html" %}
+{% load humanize %}
+{% block app %}
+
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Income</span>
+                        <h4 class="mb-3">
+                            ₦<span>{{income|intcomma}}</span>
+                        </h4>
+                    </div>
+
+                    <div class="col-4">
+                        <i class="bx bx-trending-down fa-4x text-success mb-2"></i>
+                    </div>
+                </div>
+                <div class="text-nowrap">
+                    {% comment %} <span class="badge bg-soft-success text-success">+$20.9k</span>
+                    <span class="ms-1 text-muted font-size-13">Since last week</span> {% endcomment %}
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Expenses</span>
+                        <h4 class="mb-3">
+                            ₦<span>{{expense|intcomma}}</span>
+                        </h4>
+                    </div>
+                    <div class="col-4">
+                        <i class="bx bx-trending-up text-danger fa-4x mb-2"></i>
+                    </div>
+                </div>
+                <div class="text-nowrap">
+                    {% comment %} <span class="badge bg-soft-danger text-danger">-29 Trades</span>
+                    <span class="ms-1 text-muted font-size-13">Since last week</span> {% endcomment %}
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col-->
+
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Users</span>
+                        <h4 class="mb-3">
+                            <span>{{users}}</span>
+                        </h4>
+                    </div>
+                    <div class="col-4">
+                        <i class="bx bx-user text-info fa-4x"></i>
+                    </div>
+                </div>
+                <div class="text-nowrap">
+                    {% comment %} <span class="badge bg-soft-success text-success">+ $2.8k</span>
+                    <span class="ms-1 text-muted font-size-13">Since last week</span> {% endcomment %}
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Profit Ration</span>
+                        <h4 class="mb-3">
+                            <span class="counter-value" data-target="12.57">0</span>%
+                        </h4>
+                    </div>
+                    <div class="col-4">
+                        <div id="mini-chart4" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                    </div>
+                </div>
+                <div class="text-nowrap">
+                    {% comment %} <span class="badge bg-soft-success text-success">+2.95%</span>
+                    <span class="ms-1 text-muted font-size-13">Since last week</span> {% endcomment %}
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->    
+</div><!-- end row-->
+
+<div class="row">
+    <div class="col-xl-5">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="d-flex flex-wrap align-items-center mb-4">
+                    <h5 class="card-title me-2">Statistics</h5>
+                    <div class="ms-auto">
+                        
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-sm">
+                        <div id="wallet-balance" data-colors='["#777aca", "#5156be", "#a8aada"]' class="apex-charts"></div>
+                    </div>
+                    <div class="col-sm align-self-center">
+                        <div class="mt-4 mt-sm-0">
+                            <div>
+                                <p class="mb-2"><i class="mdi mdi-circle align-middle font-size-10 me-2 text-success"></i> Income</p>
+                                <h6>{{income}}</h6>
+                            </div>
+
+                            <div class="mt-4 pt-2">
+                                <p class="mb-2"><i class="mdi mdi-circle align-middle font-size-10 me-2 text-primary"></i> Expenses</p>
+                                <h6>{{expense}}</h6>
+                            </div>
+
+                            <div class="mt-4 pt-2">
+                                <p class="mb-2"><i class="mdi mdi-circle align-middle font-size-10 me-2 text-info"></i> Users</p>
+                                <h6>{{users}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xl-7">
+        <div class="row">
+            <div class="col-xl-8">
+                <!-- card -->
+                <div class="card card-h-100">
+                    <!-- card body -->
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap align-items-center mb-4">
+                            <h5 class="card-title me-2">Invested Overview</h5>
+                            <div class="ms-auto">
+                                
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center">
+                            <div class="col-sm">
+                                <div id="invested-overview" data-colors='["#5156be", "#34c38f"]' class="apex-charts"></div>
+                            </div>
+                            <div class="col-sm align-self-center">
+                                <div class="mt-4 mt-sm-0">
+                                    <p class="mb-1">Invested Amount</p>
+                                    <h4>$ 6134.39</h4>
+
+                                    <p class="text-muted mb-4"> + 0.0012.23 ( 0.2 % ) <i class="mdi mdi-arrow-up ms-1 text-success"></i></p>
+
+                                    <div class="row g-0">
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">Income</p>
+                                                <h5 class="fw-medium">{{income}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">Expenses</p>
+                                                <h5 class="fw-medium">{{expense}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <a href="#" class="btn btn-primary btn-sm">View more <i class="mdi mdi-arrow-right ms-1"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+
+            <div class="col-xl-4">
+                <!-- card -->
+                <div class="card bg-primary text-white shadow-primary card-h-100">
+                    <!-- card body -->
+                    <div class="card-body p-0">
+                        <div id="carouselExampleCaptions" class="carousel slide text-center widget-carousel" data-bs-ride="carousel">                                                   
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="text-center p-4">
+                                        <i class="mdi mdi-bitcoin widget-box-1-icon"></i>
+                                        <div class="avatar-md m-auto">
+                                            <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
+                                                <i class="mdi mdi-currency-btc"></i>
+                                            </span>
+                                        </div>
+                                        <h4 class="mt-3 lh-base fw-normal text-white"><b>Bitcoin</b> News</h4>
+                                        <p class="text-white-50 font-size-13">Bitcoin prices fell sharply amid the global sell-off in equities. Negative news
+                                            over the Bitcoin past week has dampened Bitcoin basics
+                                            sentiment for bitcoin. </p>
+                                        <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i></button>
+                                    </div>
+                                </div>
+                                <!-- end carousel-item -->
+                                <div class="carousel-item">
+                                    <div class="text-center p-4">
+                                        <i class="mdi mdi-ethereum widget-box-1-icon"></i>
+                                        <div class="avatar-md m-auto">
+                                            <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
+                                                <i class="mdi mdi-ethereum"></i>
+                                            </span>
+                                        </div>
+                                        <h4 class="mt-3 lh-base fw-normal text-white"><b>ETH</b> News</h4>
+                                        <p class="text-white-50 font-size-13">Bitcoin prices fell sharply amid the global sell-off in equities. Negative news
+                                            over the Bitcoin past week has dampened Bitcoin basics
+                                            sentiment for bitcoin. </p>
+                                        <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i></button>
+                                    </div>
+                                </div>
+                                <!-- end carousel-item -->
+                                <div class="carousel-item">
+                                    <div class="text-center p-4">
+                                        <i class="mdi mdi-litecoin widget-box-1-icon"></i>
+                                        <div class="avatar-md m-auto">
+                                            <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
+                                                <i class="mdi mdi-litecoin"></i>
+                                            </span>
+                                        </div>
+                                        <h4 class="mt-3 lh-base fw-normal text-white"><b>Litecoin</b> News</h4>
+                                        <p class="text-white-50 font-size-13">Bitcoin prices fell sharply amid the global sell-off in equities. Negative news
+                                            over the Bitcoin past week has dampened Bitcoin basics
+                                            sentiment for bitcoin. </p>
+                                        <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i></button>
+                                    </div>
+                                </div>
+                                <!-- end carousel-item -->
+                            </div>
+                            <!-- end carousel-inner -->
+                            
+                            <div class="carousel-indicators carousel-indicators-rounded">
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                                    aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <!-- end carousel-indicators -->
+                        </div>
+                        <!-- end carousel -->
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end col -->
+</div> <!-- end row-->
+
+
+
+{% comment %} <div class="row">
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Trading</h4>
+                <div class="flex-shrink-0">
+                    <ul class="nav nav-tabs-custom card-header-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#buy-tab" role="tab">Buy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#sell-tab" role="tab">Sell</a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="buy-tab" role="tabpanel">
+                        <div class="float-end ms-2">
+                            <h5 class="font-size-14"><i class="bx bx-wallet text-primary font-size-16 align-middle me-1"></i> <a href="#!" class="text-reset text-decoration-underline">$4335.23</a></h5>
+                        </div>
+                        <h5 class="font-size-14 mb-4">Buy Coins</h5>
+                        <div>
+                            <div class="form-group mb-3">
+                                <label>Payment method :</label>
+                                <select class="form-select">
+                                    <option>Direct Bank Payment</option>
+                                    <option>Credit / Debit Card</option>
+                                    <option>Paypal</option>
+                                    <option>Payoneer</option>
+                                    <option>Stripe</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Add Amount :</label>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Amount</label>
+                                    <select class="form-select" style="max-width: 90px;">
+                                        <option value="BT" selected>BTC</option>
+                                        <option value="ET">ETH</option>
+                                        <option value="LT">LTC</option>
+                                    </select>
+                                    <input type="text" class="form-control" placeholder="0.00121255">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Price</label>
+                                    <input type="text" class="form-control" placeholder="$58,245">
+                                    <label class="input-group-text">$</label>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Total</label>
+                                    <input type="text" class="form-control" placeholder="$36,854.25">
+                                </div>
+                            </div>  
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-success w-md">Buy Coin</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <div class="tab-pane" id="sell-tab" role="tabpanel">
+                        <div class="float-end ms-2">
+                            <h5 class="font-size-14"><i class="bx bx-wallet text-primary font-size-16 align-middle me-1"></i> <a href="#!" class="text-reset text-decoration-underline">$4235.23</a></h5>
+                        </div>
+                        <h5 class="font-size-14 mb-4">Sell Coins</h5>
+
+                        <div>
+
+                            <div class="form-group mb-3">
+                                <label>Wallet ID :</label>
+                                <input type="email" class="form-control" placeholder="1cvb254ugxvfcd280ki">
+                            </div>
+
+                            <div>
+                                <label>Add Amount :</label>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Amount</label>
+                                    
+                                    <select class="form-select" style="max-width: 90px;">
+                                        <option value="BT" selected>BTC</option>
+                                        <option value="ET">ETH</option>
+                                        <option value="LT">LTC</option>
+                                    </select>
+                                    <input type="text" class="form-control" placeholder="0.00121255">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                
+                                    <label class="input-group-text">Price</label>
+                                    
+                                    <input type="text" class="form-control" placeholder="$23,754.25">
+                                    
+                                    <label class="input-group-text">$</label>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Total</label>
+                                    <input type="text" class="form-control" placeholder="$6,852.41">
+                                </div>
+                            </div>  
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-danger w-md">Sell Coin</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                </div>
+                <!-- end tab content -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Transactions</h4>
+                <div class="flex-shrink-0">
+                    <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#transactions-all-tab" role="tab">
+                                All 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#transactions-buy-tab" role="tab">
+                                Buy 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#transactions-sell-tab" role="tab">
+                                Sell  
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end nav tabs -->
+                </div>
+            </div><!-- end card header -->
+
+            <div class="card-body px-0">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="transactions-all-tab" role="tabpanel">
+                        <div class="table-responsive px-3" data-simplebar style="max-height: 352px;">
+                            <table class="table align-middle table-nowrap table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy LTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">16 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">1.88 LTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$94.22</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">17 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.42 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$84.32</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">18 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.018 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$145.80</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <div class="tab-pane" id="transactions-buy-tab" role="tabpanel">
+                        <div class="table-responsive px-3" data-simplebar style="max-height: 352px;">
+                            <table class="table align-middle table-nowrap table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                        <tr>
+                                        <td>
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">18 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.018 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$145.80</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy LTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">16 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">1.88 LTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$94.22</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">17 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.42 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$84.32</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 text-success">
+                                                <i class="bx bx-down-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
+                        <div class="table-responsive px-3" data-simplebar style="max-height: 352px;">
+                            <table class="table align-middle table-nowrap table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">18 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.018 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$145.80</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell LTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">16 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">1.88 LTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$94.22</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">17 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.42 ETH</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$84.32</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    
+
+                                    <tr>
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 text-danger">
+                                                <i class="bx bx-up-arrow-circle d-block"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">Sell BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                <p class="text-muted mb-0 font-size-12">Amount</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                </div>
+                <!-- end tab content -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Recent Activity</h4>
+                <div class="flex-shrink-0">
+                    <select class="form-select form-select-sm mb-0 my-n1">
+                        <option value="Today" selected="">Today</option>
+                        <option value="Yesterday">Yesterday</option>
+                        <option value="Week">Last Week</option>
+                        <option value="Month">Last Month</option>
+                    </select>
+                </div>
+            </div><!-- end card header -->
+
+            <div class="card-body px-0">
+                <div class="px-3" data-simplebar style="max-height: 352px;">
+                    <ul class="list-unstyled activity-wid mb-0">
+
+                        <li class="activity-list activity-border">
+                            <div class="activity-icon avatar-md">
+                                <span class="avatar-title bg-soft-warning text-warning rounded-circle">
+                                <i class="bx bx-bitcoin font-size-24"></i>
+                                </span>
+                            </div>
+                            <div class="timeline-list-item">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 overflow-hidden me-4">
+                                        <h5 class="font-size-14 mb-1">24/05/2021, 18:24:56</h5>
+                                        <p class="text-truncate text-muted font-size-13">0xb77ad0099e21d4fca87fa4ca92dda1a40af9e05d205e53f38bf026196fa2e431</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end me-3">
+                                        <h6 class="mb-1">+0.5 BTC</h6>
+                                        <div class="font-size-13">$178.53</div>
+                                    </div>
+
+                                    <div class="flex-shrink-0 text-end">
+                                        <div class="dropdown">
+                                            <a class="text-muted dropdown-toggle font-size-24" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </li>
+
+                        <li class="activity-list activity-border">
+                            <div class="activity-icon avatar-md">
+                                <span class="avatar-title bg-soft-primary text-primary rounded-circle">
+                                <i class="mdi mdi-ethereum font-size-24"></i>
+                                </span>
+                            </div>
+                            <div class="timeline-list-item">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 overflow-hidden me-4">
+                                        <h5 class="font-size-14 mb-1">24/05/2021, 18:24:56</h5>
+                                        <p class="text-truncate text-muted font-size-13">0xb77ad0099e21d4fca87fa4ca92dda1a40af9e05d205e53f38bf026196fa2e431</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end me-3">
+                                        <h6 class="mb-1">-20.5 ETH</h6>
+                                        <div class="font-size-13">$3541.45</div>
+                                    </div>
+
+                                    <div class="flex-shrink-0 text-end">
+                                        <div class="dropdown">
+                                            <a class="text-muted dropdown-toggle font-size-24" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </li>
+
+                        <li class="activity-list activity-border">
+                            <div class="activity-icon avatar-md">
+                                <span class="avatar-title bg-soft-warning text-warning rounded-circle">
+                                <i class="bx bx-bitcoin font-size-24"></i>
+                                </span>
+                            </div>
+                            <div class="timeline-list-item">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 overflow-hidden me-4">
+                                        <h5 class="font-size-14 mb-1">24/05/2021, 18:24:56</h5>
+                                        <p class="text-truncate text-muted font-size-13">0xb77ad0099e21d4fca87fa4ca92dda1a40af9e05d205e53f38bf026196fa2e431</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end me-3">
+                                        <h6 class="mb-1">+0.5 BTC</h6>
+                                        <div class="font-size-13">$5791.45</div>
+                                    </div>
+
+                                    <div class="flex-shrink-0 text-end">
+                                        <div class="dropdown">
+                                            <a class="text-muted dropdown-toggle font-size-24" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </li>
+
+                        <li class="activity-list activity-border">
+                            <div class="activity-icon avatar-md">
+                                <span class="avatar-title bg-soft-primary text-primary rounded-circle">
+                                <i class="mdi mdi-litecoin font-size-24"></i>
+                                </span>
+                            </div>
+                            <div class="timeline-list-item">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 overflow-hidden me-4">
+                                        <h5 class="font-size-14 mb-1">24/05/2021, 18:24:56</h5>
+                                        <p class="text-truncate text-muted font-size-13">0xb77ad0099e21d4fca87fa4ca92dda1a40af9e05d205e53f38bf026196fa2e431</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end me-3">
+                                        <h6 class="mb-1">-1.5 LTC</h6>
+                                        <div class="font-size-13">$5791.45</div>
+                                    </div>
+
+                                    <div class="flex-shrink-0 text-end">
+                                        <div class="dropdown">
+                                            <a class="text-muted dropdown-toggle font-size-24" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </li>
+
+
+                        <li class="activity-list activity-border">
+                            <div class="activity-icon avatar-md">
+                                <span class="avatar-title bg-soft-warning text-warning rounded-circle">
+                                <i class="bx bx-bitcoin font-size-24"></i>
+                                </span>
+                            </div>
+                            <div class="timeline-list-item">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 overflow-hidden me-4">
+                                        <h5 class="font-size-14 mb-1">24/05/2021, 18:24:56</h5>
+                                        <p class="text-truncate text-muted font-size-13">0xb77ad0099e21d4fca87fa4ca92dda1a40af9e05d205e53f38bf026196fa2e431</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end me-3">
+                                        <h6 class="mb-1">+0.5 BTC</h6>
+                                        <div class="font-size-13">$5791.45</div>
+                                    </div>
+
+                                    <div class="flex-shrink-0 text-end">
+                                        <div class="dropdown">
+                                            <a class="text-muted dropdown-toggle font-size-24" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </li>
+
+                        <li class="activity-list">
+                            <div class="activity-icon avatar-md">
+                                <span class="avatar-title bg-soft-primary text-primary rounded-circle">
+                                <i class="mdi mdi-litecoin font-size-24"></i>
+                                </span>
+                            </div>
+                            <div class="timeline-list-item">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 overflow-hidden me-4">
+                                        <h5 class="font-size-14 mb-1">24/05/2021, 18:24:56</h5>
+                                        <p class="text-truncate text-muted font-size-13">0xb77ad0099e21d4fca87fa4ca92dda1a40af9e05d205e53f38bf026196fa2e431</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end me-3">
+                                        <h6 class="mb-1">+.55 LTC</h6>
+                                        <div class="font-size-13">$91.45</div>
+                                    </div>
+
+                                    <div class="flex-shrink-0 text-end">
+                                        <div class="dropdown">
+                                            <a class="text-muted dropdown-toggle font-size-24" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </li>
+                    </ul>
+                </div>    
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div><!-- end row --> {% endcomment %}
+
+
+{% endblock app %}
+
+{% block scripts %}
+<script src="/static/assets/libs/jquery/jquery.min.js"></script>
+    <script src="/static/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="/static/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="/static/assets/libs/node-waves/waves.min.js"></script>
+    <script src="/static/assets/libs/feather-icons/feather.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="/static/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/static/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="/static/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/static/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="/static/assets/libs/jszip/jszip.min.js"></script>
+    <script src="/static/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/static/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="/static/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/static/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/static/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="/static/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/static/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <!-- Sweet Alerts js -->
+    <script src="/static/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- Datatable init js -->
+    <script src="/static/assets/js/pages/datatables.init.js"></script>
+    <!-- pace js -->
+    <script src="/static/assets/libs/pace-js/pace.min.js"></script>
+
+    <!-- apexcharts -->
+    <script src="/static/assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- ckeditor -->
+    <script src="/static/assets/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+
+    <!-- init js -->
+    <script src="/static/assets/js/pages/form-editor.init.js"></script>
+
+    <script src="/static/assets/js/app.js"></script>
+
+    <script>
+        function getChartColorsArray(r) {
+    r = $(r).attr("data-colors");
+    return (r = JSON.parse(r)).map(function (r) {
+        r = r.replace(" ", "");
+        if (-1 == r.indexOf("--")) return r;
+        r = getComputedStyle(document.documentElement).getPropertyValue(r);
+        return r || void 0
+    })
+}
+
+var piechartColors = getChartColorsArray("#wallet-balance"),
+    options = {
+        series: ['{{income}}', '{{expense}}', '{{users}}'],
+        chart: {
+            width: 227,
+            height: 227,
+            type: "pie"
+        },
+        labels: ["Income", "Expenses", "Users"],
+        colors: piechartColors,
+        stroke: {
+            width: 0
+        },
+        legend: {
+            show: !1
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                }
+            }
+        }]
+    };
+(chart = new ApexCharts(document.querySelector("#wallet-balance"), options)).render();
+var radialchartColors = getChartColorsArray("#invested-overview"),
+    options = {
+        chart: {
+            height: 270,
+            type: "radialBar",
+            offsetY: -10
+        },
+        plotOptions: {
+            radialBar: {
+                startAngle: -130,
+                endAngle: 130,
+                dataLabels: {
+                    name: {
+                        show: !1
+                    },
+                    value: {
+                        offsetY: 10,
+                        fontSize: "18px",
+                        color: void 0,
+                        formatter: function (r) {
+                            return r + "%"
+                        }
+                    }
+                }
+            }
+        },
+        colors: [radialchartColors[0]],
+        fill: {
+            type: "gradient",
+            gradient: {
+                shade: "dark",
+                type: "horizontal",
+                gradientToColors: [radialchartColors[1]],
+                shadeIntensity: .15,
+                inverseColors: !1,
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [20, 60]
+            }
+        },
+        stroke: {
+            dashArray: 4
+        },
+        legend: {
+            show: !1
+        },
+        series: [80],
+        labels: ["Series A"]
+    };
+(chart = new ApexCharts(document.querySelector("#invested-overview"), options)).render();
+    </script>
+{% endblock scripts %}

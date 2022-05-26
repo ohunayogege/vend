@@ -1,0 +1,102 @@
+{% extends "app.html" %}
+{% load humanize %}
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Fund Wallet With Bank Transfer</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">My Banks</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col p-5">
+        <button type="button" class="btn btn-info w-md waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center">Create New Account Number</button>
+    </div>
+
+    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0">Center modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please Choose the Bank that you want to create.</p>
+                    <form class="col-12" id="genBank" method="POST">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="amount">Select Bank</label>
+                            <select class="form-control bank" name="bank" required>
+                                <option selected disabled>-- Select Bank --</option>
+                                {% for bk in allbanks %}
+                                    <option value="{{ bk.code }}">{{ bk.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="genBank btn btn-primary w-md waves-effect waves-light">Generate</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+<div class="row">
+<div class="col-12">
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        {% for b in banks %}
+        <li class="nav-item waves-effect waves-light">
+            <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab"
+                href="#{{b.bank_slug}}" role="tab">
+                <span class="d-block d-sm-none">{{b.bank_name}}</span>
+                <span class="d-none d-sm-block">{{b.bank_name}}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="tab-content p-3 text-muted">
+        {% for b in banks %}
+        <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{b.bank_slug}}"
+            role="tabpanel">
+            <div class="card bg-{{color_list|random}} text-white-50 mb-0">
+                <div class="card-body">
+                    <img src="/static/images/logos/{{b.bank_slug}}.png" height="60" alt="Visa Logo">
+
+                    <h2 class="py-4 mb-0">
+                        Account Number: {{b.account_number}}
+                    </h2>
+                    <div class="row">
+                        <div class="col-8 pr-0">
+                            <h3 class="fw-bold mb-1">Account Name: {{user.username}}
+                            </h3>
+                            <h3 class="fw-bold mb-1">Bank Name: {{b.bank_name}}</h3>
+                            <br>
+                        </div>
+                        <div class="col-4 pl-0 text-right">
+                            <!-- <h3 class="fw-bold mb-1">₦50</h3>
+                            <div class="text-small text-uppercase fw-bold op-8">Charge</div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,70 @@
+{% extends "back/app.html" %}
+{% block title%}SEO Settings | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">SEO Configuration</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">SEO Settings</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                {% comment %} <h4 class="card-title">Textual inputs</h4>
+                <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
+                    textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> {% endcomment %}
+            </div>
+            <div class="card-body p-4">
+                <form class="seo_config">
+                {% csrf_token %}
+                    <div class="row">
+                        {% comment %} <h4 class="card-title">Monnify</h4> {% endcomment %}
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">SEO Description</label>
+                                    <textarea class="form-control" name="description" rows="5" required>{{website.seo_description}}</textarea>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">SEO Keywords <small>(comma separated)</small></label>
+                                    <textarea class="form-control" name="keywords" rows="5" required>{{website.seo_keywords}}</textarea>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-10 text-center">
+                            <button type="submit" class="btn btn-info btn-lg save_config">Save Changes</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock app %}

@@ -1,0 +1,183 @@
+{% extends "back/app.html" %}
+{% block title%}E-Printing Settings | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">E-Printing Configuration</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">E-Printing Details</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Update E-Printing Configuration</h4>
+            </div>
+            <div class="card-body p-4">
+                <form class="pin_config">
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">WAEC Price For Users</label>
+                                    <input class="form-control" type="text" value="{{epins.waec_price_users}}" name="waec_price_users" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">WAEC Price For Reseller</label>
+                                    <input class="form-control" type="text" value="{{epins.waec_price_res}}" name="waec_price_res">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">NECO Price For Users</label>
+                                    <input class="form-control" type="text" value="{{epins.neco_price_users}}" name="neco_price_users" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">NECO Price For Reseller</label>
+                                    <input class="form-control" type="text" value="{{epins.neco_price_res}}" name="neco_price_res">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) MTN Discounts For Users</label>
+                                    <input class="form-control" type="text" value="{{epins.mtn_discount_users}}" name="mtn_discount_users" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) MTN Discounts For Reseller</label>
+                                    <input class="form-control" type="text" value="{{epins.mtn_discount_res}}" name="mtn_discount_res">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) GLO Discounts For Users</label>
+                                    <input class="form-control" type="text" value="{{epins.glo_discount_users}}" name="glo_discount_users" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) GLO Discounts For Reseller</label>
+                                    <input class="form-control" type="text" value="{{epins.glo_discount_res}}" name="glo_discount_res">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) Airtel   For Users</label>
+                                    <input class="form-control" type="text" value="{{epins.airtel_discount_users}}" name="airtel_discount_users" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) Airtel Discounts For Reseller</label>
+                                    <input class="form-control" type="text" value="{{epins.airtel_discount_res}}" name="airtel_discount_res">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) 9mobile Discounts For Users</label>
+                                    <input class="form-control" type="text" value="{{epins.etisalat_discount_users}}" name="etisalat_discount_users" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">(%) 9mobile Discounts For Reseller</label>
+                                    <input class="form-control" type="text" value="{{epins.etisalat_discount_res}}" name="etisalat_discount_res">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="col-md-10 text-center">
+                            <button type="submit" class="btn btn-info btn-lg save_config">Save Changes</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock app %}

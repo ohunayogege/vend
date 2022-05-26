@@ -1,0 +1,237 @@
+{% extends "app.html" %}
+{% load humanize %}
+{% block title%}Data Plan | {{ website.website_name }}{% endblock title %}
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Data Plan</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Data Plan</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-lg-8 col-xl-6">
+        <div class="card card-body justify-content-center text-center bg-soft-primary">
+            <h2 class="text-center">Buy Data Plan </h2><br>
+            <form data-plans-url="/load_plans/" class="col-12 dataPlan" id="dataform" autocomplete="off" method="POST" novalidate
+                MTN_SME="{{datasettings.mtn_sme_is_active}}" MTN_CORPORATE_GIFTING="{{datasettings.mtn_cg_is_active}}"
+                MTN_GIFTING="{{datasettings.mtn_gifting_is_active}}"
+                AIRTEL_GIFTING="{{datasettings.airtel_gifting_is_active}}"
+                AIRTEL_CORPORATE_GIFTING="{{datasettings.airtel_cg_is_active}}"
+                GLO_GIFTING="{{datasettings.glo_gifting_is_active}}"
+                ETISALAT_GIFTING="{{datasettings.etisalat_gifting_is_active}}">
+                {% csrf_token %}
+                <input type="hidden" value="pay" name="service">
+
+                <div class="form-group mobile-selection" id="div_id_network">
+                    <label for="amount">Network</label>
+                    <select name='network' id='id_network' class='form-control network' required>
+                        <option required selected> -- Select Network -- </option>
+                        {% for n in nets %}
+                        <option value="{{n.slug}}">{{n.network}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group package-type-selection" style="display:none;" id="div_id_data_type">
+                    <label for="amount">Select Data Type</label>
+                    <select class="form-control package_type" name="plan_type" id="id_data_type" required>
+                        <option value="" selected>--Choose Data Type--</option>
+                        <option value="GIFTING">GIFTING</option>
+                        <option value="SME">SME</option>
+                        <option value="CORPORATE GIFTING">CORPORATE GIFTING</option>
+                    </select>
+                    <small id="hint_id_data_type" class="form-text text-muted">Select Plan Type SME, GIFTING or
+                        CORPORATE GIFTING</small>
+                </div>
+                <div class="form-group package-selection" style="display:none;" id="div_id_plan">
+                    <label for="amount">Select Plan</label>
+                    <select class="form-control package" name="plan" id="id_plan" required>
+                    </select>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Amount</label>
+                    <input type="tel" class="form-control amount" name="amount" readonly>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Mobile Number</label>
+                    <input type="text"
+                        onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9+]+/g,'')"
+                        class="form-control mobile" id="mobile" autocomplete="pwd" name="mobile" required>
+                    <div id="error"></div>
+                    <div id="errorNumber"></div>
+                </div>
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit"
+                        class="btn btn-primary waves-effect waves-light w-100 purchase">Purchase</button>
+                </div>
+                {% comment %} <div class="text-center pt-4"><span id="img_loader"></span></div> {% endcomment %}
+            </form>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-4 first-item">
+        <center>
+            <h4>Codes for Data Balance: </h4>
+        </center>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-warning">MTN [SME] *461*4# </li>
+            <li class="list-group-item list-group-item-warning">MTN [Gifting] *131*4# or *460*260# </li>
+            <li class="list-group-item list-group-item-dark"> 9mobile [Gifting] *228# </li>
+            <li class="list-group-item list-group-item-danger"> Airtel *140# </li>
+            <li class="list-group-item list-group-item-success"> Glo *127*0#. </li>
+        </ul>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js">
+</script>
+
+
+
+
+<script>
+    $("#id_network").change(function () {
+
+
+        var networkd = $("#id_network option:selected").text();
+
+        var mtn_sme = $("#dataform").attr("MTN_SME")
+        var mtn_gifting = $("#dataform").attr("MTN_GIFTING")
+        var mtn_cg = $("#dataform").attr("MTN_CORPORATE_GIFTING")
+        var airtel_gifting = $("#dataform").attr("AIRTEL_GIFTING")
+        var airtel_cg = $("#dataform").attr("AIRTEL_CORPORATE_GIFTING")
+        var glo_gifting = $("#dataform").attr("GLO_GIFTING")
+        var etisalat_gifting = $("#dataform").attr("ETISALAT_GIFTING")
+
+
+        //   <!--alert(sme_disable)-->
+        if (networkd == "MTN") {
+            $("#div_id_plan").css("display", "none");
+            $("#div_id_data_type").css("display", "block");
+            $('#id_data_type option[value="CORPORATE GIFTING"]').css('display', 'block');
+            $('#id_plan option[plantype="CORPORATE GIFTING"]').css('display', 'block');
+            $('#id_data_type option[value="SME"]').css('display', 'block');
+            $('#id_plan option[plantype="SME"]').css('display', 'block');
+            $('#id_data_type option[value="GIFTING"]').css('display', 'block');
+            $('#id_plan option[plantype="GIFTING"]').css('display', 'block');
+
+
+            if (networkd == "MTN" && mtn_sme == "False") {
+                $('#id_data_type option[value="SME"]').css('display', 'none');
+                $('#id_plan option[plantype="SME"]').css('display', 'none');
+
+            } else if (networkd == "MTN" && mtn_gifting == "False") {
+                $('#id_data_type option[value="GIFTING"]').css('display', 'none');
+                $('#id_plan option[plantype="GIFTING"]').css('display', 'none');
+            } else if (networkd == "MTN" && mtn_cg == "False") {
+                $('#id_data_type option[value="CORPORATE GIFTING"]').css('display', 'none');
+                $('#id_plan option[plantype="CORPORATE GIFTING"]').css('display', 'none');
+            }
+
+        } else if (networkd == "Airtel") {
+            $("#div_id_plan").css("display", "none");
+            $("#div_id_data_type").css("display", "block");
+            $('#id_data_type option[value="CORPORATE GIFTING"]').css('display', 'block');
+            $('#id_plan option[plantype="CORPORATE GIFTING"]').css('display', 'block');
+            $('#id_data_type option[value="SME"]').css('display', 'none');
+            $('#id_plan option[plantype="SME"]').css('display', 'none');
+
+
+            if (networkd == "AIRTEL" && airtel_cg == "False") {
+                $('#id_data_type option[value="CORPORATE GIFTING"]').css('display', 'none');
+                $('#id_plan option[plantype="CORPORATE GIFTING"]').css('display', 'none');
+            } else {
+                $("#div_id_data_type").css("display", "none");
+                $("#div_id_plan").css("display", "block");
+        }
+        } else {
+            $("#div_id_data_type").css("display", "none");
+            $("#div_id_plan").css("display", "block");
+        }
+    });
+
+
+    $("#id_network").change(function () {
+        var url = $("#dataform").attr("data-plans-url"); // get the url of the `load_cities` view
+
+        var networkId = $(this).val(); // get the selected country ID from the HTML input
+
+        $.ajax({ // initialize an AJAX request
+            url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            data: {
+                'network': networkId, // add the country id to the GET parameters
+                "datatype": null,
+
+            },
+            success: function (data) { // `data` is the return of the `load_cities` view function
+                let dropdown = $('#id_plan');
+
+                dropdown.empty();
+
+                dropdown.append(
+                    '<option selected="true"  price="" disabled>Select Package</option>');
+                dropdown.prop('selectedIndex', 0);
+
+                $.each(data.data, function (key, entry) {
+                    dropdown.append($('<option></option>').attr('value', entry.id).attr(
+                        'data-amount', entry.amount).text(entry.plan));
+                });
+                //$("#id_plan").html(data.data); // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+    });
+
+    $("#id_data_type").change(function () {
+        $("#div_id_plan").css("display", "block");
+        var url = $("#dataform").attr("data-plans-url"); // get the url of the `load_cities` view
+        var networkId = $("#id_network option:selected").val();
+        var datatype = $(this).val(); // get the selected country ID from the HTML input
+
+        $.ajax({ // initialize an AJAX request
+            url: url, // set the url of the request
+            data: {
+                'network': networkId, // add the country id to the GET parameters
+                "datatype": datatype,
+            },
+            success: function (data) { // `data` is the return of the `load_cities` view function
+                let dropdown = $('#id_plan');
+
+                dropdown.empty();
+
+                dropdown.append(
+                    '<option selected="true"  price="" disabled>Select Package</option>');
+                dropdown.prop('selectedIndex', 0);
+
+                $.each(data.data, function (key, entry) {
+                    console.log(entry)
+                    dropdown.append($('<option></option>').attr('value', entry.id).attr(
+                        'data-amount', entry.amount).text(entry.plan));
+                });
+                // $("#id_plan").html(data.data); // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+    });
+
+    $("#id_plan").change(function () {
+        var amt = $("#id_plan option:selected").data("amount");
+        $(".amount").val(String("₦" + amt));
+        $(".amount").prop('disabled', true);
+    });
+</script>
+
+{% endblock body %}

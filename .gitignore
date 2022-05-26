@@ -1,0 +1,10 @@
+env
+db.sqlite3
+*migrations
+*__pycache__/*
+migrations/*
+Procfile
+__pycache__/*
+giftonia/settings.py
+.vscode
+venv

@@ -1,0 +1,92 @@
+{% extends "back/app.html" %}
+{% block app %}
+
+<div class="row">
+<div class="col-md-6">
+    <div class="mb-3">
+        <h5 class="card-title">Pin List <span class="text-muted fw-normal ms-2">({{pins|length}})</span></h5>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+        <div>
+            
+        </div>
+        <div>
+            <button type="button" class="btn btn-danger waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-centerDelete">Delete Used Pins</button>
+            <a href="{% url 'e_pin_set' %}" class="btn btn-info"><i class="bx bx-plus me-1"></i> Add New</a>
+        </div>
+        <div class="modal fade bs-example-modal-centerDelete" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Center modal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" onclick="deleteCard('e_pins');" class="btn btn-danger"> Confirm</a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+    </div>
+
+</div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">NECO Cards</h4>
+                <p class="card-title-desc">
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Pin</th>
+                        <th>Status</th>
+                        <th>Date/Time</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for u in pins %}
+                    <tr>
+                        <td>{{u.reference}}</td>
+                        <td>{{u.pin}}</td>
+                        <td>{{u.status}}</td>
+                        <td>{{u.date}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="{% url 'a_epin_del' u.pk %}">Delete</a></li>
+                                    {% comment %} <li><a class="dropdown-item" href="{% url 'a_user_update' u.username %}">Update User</a></li> {% endcomment %}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+
+{% endblock app %}

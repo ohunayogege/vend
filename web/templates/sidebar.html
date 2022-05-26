@@ -1,0 +1,146 @@
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
+
+                <li>
+                    <a style="color:blue;" href="{% url 'index' %}" class="waves-effect">
+                        <i style="color:#e3ff00;" class="bx bx-home"></i>
+                        <span>Visit Homepage</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:blue;" href="{% url 'home' %}" class="waves-effect">
+                        <i style="color:#e3ff00;" class="bx bx-home-circle"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:blue;" href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i style="color:blue;" class="bx bx-money"></i>
+                        <span>Fund Wallet</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a style="color:blue;" href="{% url 'fund_card' %}">Fund With ATM Card</a></li>
+                        <li><a style="color:blue;" href="{% url 'fund_bank' %}">Bank Transfer</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-title">Payment</li>
+                <li>
+                    <a style="color:blue;" href="{% url 'datas' %}" class="waves-effect">
+                        <i style="color:green;" class="bx bx-wifi"></i>
+                        <span>Buy Data</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:blue;" href="{% url 'airtime' %}" class="waves-effect">
+                        <i style="color:yellow;" class="bx bx-phone-call"></i>
+                        <span>Buy Airtime</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a style="color:blue;" href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i style="color:purple;" class="bx bxs-bulb"></i>
+                        <span>Utilities Payment</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a style="color:blue;" href="{% url 'meter_token' %}">Electrical Bills</a></li>
+                        <li><a style="color:blue;" href="{% url 'tv_decoder' %}">Cable Subscription</a></li>
+                        {% comment %} <li><a style="color:blue;" href="{% url 'smile-direct' %}">Smile Subscription</a></li> {% endcomment %}
+                    </ul>
+                </li>
+
+                <li class="menu-title">Extras</li>
+                {% comment %} <li>
+                    <a style="color:blue;" href="{{ website.whatsapp_link|safe }}" class="waves-effect">
+                        <i style="color:silver;" class="bx bx-money"></i>
+                        <span>Buy/Sell Gift Cards</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:blue;" href="{{ website.whatsapp_link|safe }}" class="waves-effect">
+                        <i style="color:gold;" class="bx bx-bitcoin"></i>
+                        <span>Buy/Sell Crypto</span>
+                    </a>
+                </li> {% endcomment %}
+                {% comment %} <li>
+                    <a style="color:blue;" href="{% url 'pricing' %}" class="waves-effect">
+                        <i style="color:navy;" class="bx bx-money"></i>
+                        <span>Pricing</span>
+                    </a>
+                </li> {% endcomment %}
+                <li>
+                    <a style="color:blue;" href="{% url 'trans' %}" class="waves-effect">
+                        <i style="color:red;" class="bx bxs-user"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:blue;" href="{% url 'epins' %}" class="waves-effect">
+                        <i style="color:cyan;" class="bx bxs-school"></i>
+                        <span>Result Checker</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:blue;" href="{% url 'cards' %}" class="waves-effect">
+                        <i style="color:#13d4cf;" class="bx bx-credit-card"></i>
+                        <span>Recharge Card printing</span>
+                    </a>
+                </li>
+                {% comment %} <li>
+                    <a style="color:red;" href="{% url 'resultChecker' %}" class="waves-effect">
+                        <i class="bx bxs-cog"></i>
+                        <span>Result Checkers</span>
+                    </a>
+                </li> {% endcomment %}
+                <li>
+                    <a style="color:blue;" href="{% url 'settings' %}" class="waves-effect">
+                        <i style="color:brown;" class="bx bxs-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a style="color:blue;" href="{% url 'contactList' %}" class="waves-effect">
+                        <i style="color:red;" class="bx bx-support"></i>
+                        <span>Contact List</span>
+                    </a>
+                </li>
+                {% comment %} {% if user.user_type == 'api' %}
+                <li>
+                    <a style="color:blue;" href="{% url 'docs' %}" class="waves-effect">
+                        <i style="color:red;" class="bx bx-code-alt"></i>
+                        <span>Developer's API</span>
+                    </a>
+                </li>
+                {% endif %} {% endcomment %}
+
+                <li class="menu-title"></li>
+                <li>
+                    <a style="color:blue;" href="{% url 'logout' %}" class="waves-effect">
+                        <i style="color:skyblue;" class="bx bx-home-circle"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+
+                <li class="menu-title">Version</li>
+                <li>
+                    <a style="color:blue;" href="{% url 'home' %}" class="waves-effect">
+                        
+                        <span>Version 1.0.1</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>
+<!-- Left Sidebar End -->

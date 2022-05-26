@@ -1,0 +1,78 @@
+{% extends "app.html" %}
+{% load humanize %}
+{% block title%}Recharge Pin Order | {{ website.website_name }}{% endblock title %}
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Recharge Pin Order</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Recharge Pin Order</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-lg-8 col-xl-6">
+    <h4 class="text-center">Start your own recharge card printing business & earn extra cash!</h4>
+        <div class="card card-body justify-content-center text-center bg-soft-primary">
+            <h2 class="card-title mt-0">Generate New Recharge Card</h2>
+            <form class="ecard" id="ecard" method="POST" autocomplete="off">
+            <input type="hidden" value="{{mtn_price}}" id="mtn_price">
+            <input type="hidden" value="{{glo_price}}" id="glo_price">
+            <input type="hidden" value="{{airtel_price}}" id="airtel_price">
+            <input type="hidden" value="{{etisalat_price}}" id="etisalat_price">
+            {% csrf_token %}
+                
+                <div class="form-group mobile-selection">
+                    <label for="amount">Network</label>
+                    <select name='network' class='form-control e_network' required>
+                        <option disabled selected> -- Select Network -- </option>
+                        <option value="MTN">MTN</option>
+                        <option value="GLO">GLO</option>
+                        <option value="9mobile">9MOBILE</option>
+                        <option value="Airtel">AIRTEL</option>
+                    </select>
+                </div>
+                <div class="form-group mobile-selection">
+                    <label for="amount">Denomination</label>
+                    <select name='denomination' class='form-control denomination' required>
+                        <option disabled selected> -- Select Denomination -- </option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                    </select>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Quantity</label>
+                    <input type="text" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" maxlength="2" class="form-control e_quantity" name="quantity" id="e_quantity" required>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Amount</label>
+                    <input type="tel" class="form-control amount" name="amount" readonly>
+                </div>
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 purchase">Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% comment %} <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <ul class="list-group mt-5 network_list">
+            <li class="list-group-item list-group-item-warning"></li>
+        </ul>
+    </div> {% endcomment %}
+</div>
+
+{% endblock body %}

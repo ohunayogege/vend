@@ -1,0 +1,134 @@
+{% extends "back/app.html" %}
+{% block title%}Data Plans | Products | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Data Plans</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Data Plans</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+            <div>
+                
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bx bx-plus me-1"></i> Add Plan</button>
+            </div>
+            <!-- Static Backdrop Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Add New Data Plan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="addingPlan" method="POST">
+                        <div class="modal-body">
+                                {% csrf_token %}
+                                <div class="form-group mb-3">
+                                    <label>Network</label>
+                                    <input type="text" class="form-control" name="network" value="{{network|upper}}" readonly>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Plan ID</label>
+                                    <input type="text" class="form-control" name="plan_id" placeholder="92">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Data Plan</label>
+                                    <input type="text" class="form-control" name="plan" placeholder="10GB - 1 month">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Data Plan Type</label>
+                                    <input type="text" class="form-control" name="plan_type" placeholder="DIRECCT" oninput="this.value = this.value.toUpperCase()" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Amount</label>
+                                    <input type="text" name="amount" class="form-control" placeholder="50">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Customer Price</label>
+                                    <input type="text" class="form-control" name="customer_price" placeholder="100">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Reseller Price</label>
+                                    <input type="text" class="form-control" name="reseller_price" placeholder="200">
+                                </div>
+                                {% comment %} <div class="form-group mb-3">
+                                    <label>API Price</label>
+                                    <input type="text" class="form-control" placeholder="300" name="api_price">
+                                </div> {% endcomment %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                {% comment %} <h4 class="card-title">Table Edit</h4> {% endcomment %}
+                {% comment %} <p class="card-title-desc">Table Edits is a lightweight jQuery plugin for making table rows editable.</p> {% endcomment %}
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-editable table-nowrap align-middle">
+                        <thead>
+                            <tr>
+                                <th>Plan ID</th>
+                                <th>Network Name</th>
+                                <th>Data Plan</th>
+                                <th>Plan Type</th>
+                                <th>Amount</th>
+                                <th>Customer Price</th>
+                                <th>Reseller Price</th>
+                                {% comment %} <th>API Price</th> {% endcomment %}
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for n in plans %}
+                            <tr data-id="{{n.id}}">
+                                <td data-field="pid" style="width: 30px">{{n.pid}}</td>
+                                <td data-field="network">{{n.network.network}}</td>
+                                <td data-field="plan">{{n.plan}}</td>
+                                <td data-field="data_type">{{n.plan_type}}</td>
+                                <td data-field="amount">{{n.amount}}</td>
+                                <td data-field="customer_price">{{n.customer_price}}</td>
+                                <td data-field="reseller_price">{{n.reseller_user_price}}</td>
+                                {% comment %} <td data-field="api_price">{{n.api_user_price}}</td> {% endcomment %}
+                                <td style="width: 100px">
+                                    <a class="btn btn-outline-danger btn-sm edit" href="{% url 'a_data_plans_del' n.network.slug n.id %}" title="Delete">
+                                        <i class="fas fa-archive"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+{% endblock app %}

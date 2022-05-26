@@ -1,0 +1,82 @@
+{% extends "app.html" %}
+
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Electrical Bills</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Electrical Bills</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-lg-8 col-xl-6">
+        <div class="card card-body justify-content-center text-center bg-soft-primary">
+            <h2 class="text-center">Pay for your Electricity Bill </h2><br>
+            <form class="col-12" id="metet" method="POST" autocomplete="off">
+                {% csrf_token %}
+                <input type="hidden" id="electricy_price" value="{{electricity}}">
+                
+                <div class="form-group">
+                    <label for="amount">Select Disco</label>
+                    <select class="form-control discotype" name="disco" required>
+                        <option selected disabled>-- Select DISCO --</option>
+                        <option value="abuja-electric">ABUJA ELECTRIC</option>
+                        <option value="eko-electric">EKO ELECTRIC</option>
+                        <option value="ibadan-electric">IBADAN ELECTRIC</option>
+                        <option value="ikeja-electric">IKEJA ELECTRIC</option>
+                        <option value="jos-electric">JOS ELECTRIC</option>
+                        <option value="kaduna-electric">KADUNA ELECTRIC</option>
+                        <option value="kano-electric">KANO ELECTRIC</option>
+                        <option value="portharcourt-electric">PORTHARCOURT ELECTRIC</option>
+                    </select>
+                </div>
+
+                <div class="form-group package-selection">
+                    <label for="amount">Select Meter Type</label>
+                    <select class="form-control disco_type" name="disco_type" required>
+                        <option selected disabled>-- Select DISCO TYPE--</option>
+                        <option value="prepaid">Prepaid Meter</option>
+                        <option value="postpaid">Postpaid Meter</option>
+                    </select>
+                </div>
+                <div class="form-group mobile-selection">
+                    <label for="amount">Mobile Number*</label>
+                    <input type="text" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control mobile_number" name="mobile_number" required>
+                </div>
+                <div class="form-group iuc-selection">
+                    <label for="amount">Meter Number*</label>
+                    <input type="text" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control disco_number" name="disco_number" required>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Amount</label>
+                    <input type="text" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control amount" id="metre-amount" name="amount" required>
+                </div>
+                <div class="form-group cname-selection" style="display:none;">
+                    <label for="amount">Customer Name</label>
+                    <input type="text" class="form-control cname" name="cname" readonly>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount" class="font-italic text-success">CashBack</label>
+                    <input type="text" class="form-control bonus" name="bonus" readonly>
+                </div>
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 validate">Validate Details</button>
+                    <button type="submit" onclick="purchaseToken();" class="btn btn-primary waves-effect waves-light w-100 purchase" style="display:none;">Purchase</button>
+                </div>
+                <div class="text-center pt-4"><span id="img_loader"></span></div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,82 @@
+{% extends "app.html" %}
+{% load humanize %}
+{% block title%}Buy Airtime | {{ website.website_name }}{% endblock title %}
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Airtime</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Purchase Airtime</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-lg-8 col-xl-6">
+        <div class="card card-body justify-content-center text-center bg-soft-primary">
+            <h2 class="card-title mt-0">Buy Airtime</h2>
+            <form class="airtime" id="airtime" method="POST" autocomplete="off">
+            <input type="hidden" name="service" value="pay">
+                {% csrf_token %}
+                <input type="hidden" id="mtn" value="{{mtn}}">
+                <input type="hidden" id="glo" value="{{glo}}">
+                <input type="hidden" id="airtel" value="{{airtel}}">
+                <input type="hidden" id="etisalat" value="{{etisalat}}">
+                
+                <div class="form-group mobile-selection">
+                    <label for="amount">Network</label>
+                    <select name='network' class='form-control network' required>
+                        <option required selected> -- Select Network -- </option>
+                        <option value="MTN">MTN</option>
+                        <option value="Airtel">Airtel</option>
+                        <option value="Glo">GLO</option>
+                        <option value="9mobile">9mobile</option>
+                    </select>
+                </div>
+                <div class="form-group amt-selection">
+                    <label for="amount">Mobile Number</label>
+                    <input type="text" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control mobile" name="mobile" id="mobile" autocomplete="pwd" required>
+                    <div id="error"></div>
+                    <div id="errorNumber"></div>
+                </div>
+                <input type="hidden" id="ported_number" name="ported">
+                <div class="form-group amt-selection">
+                    <label for="amount">Amount</label>
+                    <input type="text" autocomplete="pwd" onkeyup="if (/[^0-9]+/g.test(this.value)) this.value = this.value.replace(/[^0-9]+/g,'')" class="form-control amount" id="airtime-amount" name="amount" required>
+                </div>
+
+                <div class="form-group amt-selection">
+                    <label for="amount" class="font-italic text-success">CashBack</label>
+                    <input type="text" class="form-control bonus" name="bonus" readonly>
+                </div>
+                <div class="container justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light w-100 purchase">Purchase</button>
+                </div>
+                {% comment %} <div class="text-center pt-4"><span id="img_loader"></span></div> {% endcomment %}
+            </form>
+        </div>
+    </div>
+
+    <div class="col-1"></div>
+    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-4 first-item">
+        <center> <h4>Codes for Airtime Balance: </h4></center>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-warning">MTN     *556#  </li>
+            {% comment %} <li class="list-group-item list-group-item-warning">MTN [Gifting]     *131*4# or *460*260#  </li> {% endcomment %}
+            <li class="list-group-item list-group-item-info"> 9mobile   *232# </li>
+            <li class="list-group-item list-group-item-danger"> Airtel   *123# </li>
+            <li class="list-group-item list-group-item-success"> Glo  #124*1# </li>
+        </ul>
+
+    </div>
+</div>
+{% endblock body %}

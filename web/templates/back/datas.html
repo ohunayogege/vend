@@ -1,0 +1,184 @@
+{% extends "back/app.html" %}
+{% block title%}Data Products | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Data Product</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Data Products</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                {% comment %} <h4 class="card-title">Textual inputs</h4>
+                <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
+                    textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> {% endcomment %}
+            </div>
+            <div class="card-body p-4">
+                <form class="data_config">
+                {% csrf_token %}
+                    <div class="row">
+                        <h4 class="card-title">MTN Network</h4>
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Customer Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.mtn}}" name="mtn" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reseller Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.mtn_res}}" name="mtn_res" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">API Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.mtn_api}}" name="mtn_api" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h4 class="card-title mt-4">Glo Network</h4>
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Customer Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.glo}}" name="glo" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reseller Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.glo_res}}" name="glo_res" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">API Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.glo_api}}" name="glo_api" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h4 class="card-title mt-4">Airtel Network</h4>
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Customer Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.airtel}}" name="airtel" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reseller Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.airtel_res}}" name="airtel_res" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">API Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.airtel_api}}" name="airtel_api" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h4 class="card-title mt-4">9mobile Network</h4>
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Customer Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.etisalat}}" name="etisalat" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Reseller Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.etisalat_res}}" name="etisalat_res" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">API Percentage</label>
+                                    <input class="form-control" type="text" value="{{com.etisalat_api}}" name="etisalat_api" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-10 text-center">
+                            <button type="submit" class="btn btn-info btn-lg save_config">Save Changes</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock app %}

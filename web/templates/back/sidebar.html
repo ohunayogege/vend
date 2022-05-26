@@ -1,0 +1,250 @@
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title" data-key="t-menu">Menu</li>
+
+                <li>
+                    <a href="{% url 'a_home' %}">
+                        <i data-feather="home"></i>
+                        <span data-key="t-dashboard">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'a_admins' %}">
+                        <i data-feather="users"></i>
+                        <span data-key="t-dashboard">Admins</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="users"></i>
+                        <span data-key="t-apps">Users</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{% url 'a_users' %}">
+                                <span data-key="t-website">Customer</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'a_res_users' %}">
+                                <span data-key="t-website">Resellers</span>
+                            </a>
+                        </li>
+                        {% comment %} <li>
+                            <a href="{% url 'a_api_users' %}">
+                                <span data-key="t-website">API Users</span>
+                            </a>
+                        </li> {% endcomment %}
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="sliders"></i>
+                        <span data-key="t-apps">Transactions</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{% url 'a_transactions' %}">
+                                <span data-key="t-website">Transactions</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'a_wallettransactions' %}">
+                                <span data-key="t-chat">Wallet</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="sliders"></i>
+                        <span data-key="t-apps">Products</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow">
+                                <span data-key="t-email">Data/Airtime</span>
+                            </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="{% url 'a_networks' %}" data-key="t-inbox">Network List</a></li>
+                                <li><a href="{% url 'a_data_plans' 'mtn' %}" data-key="t-inbox">MTN Data Plans</a></li>
+                                <li><a href="{% url 'a_data_plans' 'glo' %}" data-key="t-inbox">GLO Data Plans</a></li>
+                                <li><a href="{% url 'a_data_plans' 'airtel' %}" data-key="t-inbox">Airtel Data Plans</a></li>
+                                <li><a href="{% url 'a_data_plans' '9mobile' %}" data-key="t-inbox">9mobile Data Plans</a></li>
+                            </ul>
+                        </li>
+
+                         <li>
+                            <a href="javascript: void(0);" class="has-arrow">
+                                <span data-key="t-email">Cable TV</span>
+                            </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="{% url 'a_cables' 'dstv' %}" data-key="t-read-email">DSTV</a></li>
+                                <li><a href="{% url 'a_cables' 'gotv' %}" data-key="t-read-email">GOTV</a></li>
+                                <li><a href="{% url 'a_cables' 'startimes' %}" data-key="t-read-email">Startimes</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                    <i data-feather="sliders"></i>
+                        <span data-key="t-email">Products Setting</span>
+                    </a>
+                    <ul class="sub-menu mm-collapse" aria-expanded="false">
+                        <li><a href="{% url 'product_set' %}" data-key="t-inbox">Product Settings</a></li>
+                        <li><a href="{% url 'airtime_set' %}" data-key="t-read-email">Airtime Commission</a></li>
+                        <li><a href="{% url 'bills_set' %}" data-key="t-read-email">Disco Commission</a></li>
+                    </ul>
+                </li>
+                {% if user.staff_type == 'Gold' or user.staff_type == 'E-Pin' %}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="sliders"></i>
+                        <span data-key="t-apps">E-Printing</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow">
+                                <span data-key="t-email">Recharge Cards</span>
+                            </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="{% url 'a_ecard' %}" data-key="t-inbox">MTN</a></li>
+                                <li><a href="{% url 'a_ecard_glo' %}" data-key="t-inbox">GLO</a></li>
+                                <li><a href="{% url 'a_ecard_airtel' %}" data-key="t-inbox">Airtel</a></li>
+                                <li><a href="{% url 'a_ecard_9mobile' %}" data-key="t-inbox">9mobile</a></li>
+                                {% comment %} <li><a href="{% url 'bills_set' %}" data-key="t-read-email">Bills Commission</a></li> {% endcomment %}
+                            </ul>
+                        </li>
+
+                         <li>
+                            <a href="javascript: void(0);" class="has-arrow">
+                                <span data-key="t-email">Scratch Cards</span>
+                            </a>
+                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                <li><a href="{% url 'a_epin' %}" data-key="t-inbox">WAEC Cards</a></li>
+                                <li><a href="{% url 'a_epin_neco' %}" data-key="t-read-email">NECO Cards</a></li>
+                                {% comment %} <li><a href="{% url 'bills_set' %}" data-key="t-read-email">Bills Commission</a></li> {% endcomment %}
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'pin_settings' %}">
+                                <span data-key="t-chat">E-Printing Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+                {% if user.staff_type == 'Commission' %}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                    <i data-feather="sliders"></i>
+                        <span data-key="t-email">Products Setting</span>
+                    </a>
+                    <ul class="sub-menu mm-collapse" aria-expanded="false">
+                        <li><a href="{% url 'product_set' %}" data-key="t-inbox">Product Settings</a></li>
+                        <li><a href="{% url 'airtime_set' %}" data-key="t-read-email">Airtime Commission</a></li>
+                        <li><a href="{% url 'bills_set' %}" data-key="t-read-email">Disco Commission</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+
+
+                {% if user.staff_type == 'Gold' %}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="sliders"></i>
+                        <span data-key="t-apps">Configuration</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{% url 'web_set' %}">
+                                <span data-key="t-website">Website Details</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'logo_set' %}">
+                                <span data-key="t-chat">Website Logo</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'a2c_set' %}">
+                                <span data-key="t-a2c">Airtime To Cash Settings</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'api_set' %}">
+                                <span data-key="t-api">API Settings</span>
+                            </a>
+                        </li>
+
+                        {% comment %} <li>
+                            <a href="{% url 'commission' %}">
+                                <span data-key="t-chat">Pricing</span>
+                            </a>
+                        </li> {% endcomment %}
+
+                        <li>
+                            <a href="{% url 'ref_set' %}">
+                                <span data-key="t-chat">Referral Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'a_req' %}">
+                        <i data-feather="users"></i>
+                        <span data-key="t-dashboard">Airtime 2 Cash Req</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'a_ann' %}">
+                        <i data-feather="users"></i>
+                        <span data-key="t-dashboard">Announcements</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'a_contacts' %}">
+                        <i data-feather="users"></i>
+                        <span data-key="t-dashboard">Contact List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'a_profile' %}">
+                        <i data-feather="users"></i>
+                        <span data-key="t-dashboard">Edit Profile</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+            <div class="card sidebar-alert border-0 text-center mx-4 mb-0 mt-5">
+                <div class="card-body">
+                    <img src="/static/assets/images/giftbox.png" alt="">
+                    <div class="mt-4">
+                        <h5 class="alertcard-title font-size-16">Developer Reachout</h5>
+                        <p class="font-size-13">Reach out for any Support from the Developer.</p>
+                        <a href="https://prudentcoreng.com" class="btn btn-primary mt-2" target="_blank" rel="follow">Visit Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>
+<!-- Left Sidebar End -->

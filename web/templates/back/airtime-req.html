@@ -1,0 +1,57 @@
+{% extends "back/app.html" %}
+{% load humanize %}
+{% block app %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">All Airtime 2 Cash Requests</h4>
+                <p class="card-title-desc">
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Username</th>
+                        <th>Mobile</th>
+                        <th>Fund Type</th>
+                        <th>Amount</th>
+                        <th>Cash Back</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for u in anns %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{u.user.username}}</td>
+                        <td>{{u.mobile}}</td>
+                        <td>{{u.method}}</td>
+                        <td>{{u.amount|intcomma}}</td>
+                        <td>{{u.cash_back|intcomma}}</td>
+                        <td>{{u.date}}</td>
+                        <td>
+                            <a href="{% url 'a_req_del' u.pk %}" class="btn btn-danger font-size-16 shadow-none py-2 text-white">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+
+{% endblock app %}

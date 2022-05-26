@@ -1,0 +1,150 @@
+{% extends "back/app.html" %}
+{% block title%}Airtime 2 Cash Settings | {{ website.website_name }}{% endblock title %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Airtime 2 Cash</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">A2C Settings</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            
+            <div class="card-body p-4">
+                <form class="a2c_setup">
+                {% csrf_token %}
+                    <div class="row">
+                        <h4 class="card-title">GLO</h4>
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">GLO Number</label>
+                                    <input class="form-control" type="text" value="{{a2c.glo_number}}" name="glo_number" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">GLO Percentage (%)</label>
+                                    <input class="form-control" type="text" value="{{a2c.glo}}" name="glo_percent" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h4 class="card-title">MTN</h4>
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">MTN Number</label>
+                                    <input class="form-control" type="text" value="{{a2c.mtn_number}}" name="mtn_number" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">MTN Percentage (%)</label>
+                                    <input class="form-control" type="text" value="{{a2c.mtn}}" name="mtn_percent" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h4 class="card-title">Airtel</h4>
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Airtel Number</label>
+                                    <input class="form-control" type="text" value="{{a2c.airtel_number}}" name="airtel_number" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Airtel Percentage (%)</label>
+                                    <input class="form-control" type="text" value="{{a2c.airtel}}" name="airtel_percent" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h4 class="card-title">9mobile</h4>
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">9mobile Number</label>
+                                    <input class="form-control" type="text" value="{{a2c.etisalat_number}}" name="etisalat_number" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">9mobile Percentage (%)</label>
+                                    <input class="form-control" type="text" value="{{a2c.etisalat}}" name="etisalat_percent" required>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="example-text-input" class="form-label">Notification Number</label>
+                                    <input class="form-control" type="text" value="{{a2c.notification_number}}" name="notification_number" required>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="col-md-10 text-center">
+                            <button type="submit" class="btn btn-info btn-lg save_config">Save Changes</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock app %}

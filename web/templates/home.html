@@ -1,0 +1,497 @@
+{% extends "app.html" %}
+{% load humanize %}
+{% block body %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Dashboard</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Welcome to {{website.website_name}}</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-xl-4">
+        <div class="card overflow-hidden">
+            <div class="bg-soft-primary">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="text-primary p-3">
+                            <h5 class="text-primary">{{greeting}}, {{user.username}}</h5>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="col-5 align-self-end">
+                        <img src="/static/images/profile-img.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="avatar-md profile-user-wid mb-4">
+                            <img src="/static/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
+                        </div>
+                        <h5 class="font-size-15">{{ user.first_name }} {{ user.last_name }}</h5>
+                        {% comment %} <p class="text-muted mb-0 text-truncate">{{ user.username }}</p> {% endcomment %}
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="pt-4">
+                            
+
+                            <div class="mt-4">
+                                {% comment %} <a href="#"
+                                    class="btn btn-primary waves-effect waves-light btn-sm">Transaction History <i
+                                        class="mdi mdi-arrow-right ml-1"></i></a> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="panel-header bg-primary  px-3 bubble-shadow">
+                <div class="page-inner py-2">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row py-4">
+                        <div>
+                            <h5 class="text-white mb-2" style="font-size: 14px;">Refer people to
+                                {{website.website_name}} and
+                                get {{ref.referral_bonus}}% of their first purchase.
+                            </h5>
+                            <p class="mb-0 text-white" style="font-size: 13px;"> <b>Referral Link:</b>
+                                <span class="data-toggle=" id="mytext">{{my_link}}</span>
+                                <span class="badge badge-dark" onclick="CopyToClipboard('mytext');"
+                                    style="cursor: pointer;">copy</span>
+
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card overflow-hidden ">
+            <div class="card-body pt-0 mt-4">
+                <div class="row">
+                    <div class="container h-100">
+                        <div class="card card-body bg-soft-info justify-content-center text-center">
+                            <br>
+                            <h6 class="mb-4">Your Current Plan is: <span
+                                    class="text-danger">{{user.user_type|capfirst}}</span></h6>
+                            {% if user.user_type == 'customer' %}
+                            <form class="col-12 change_plan" id="change_plan" method="POST">
+                                {% csrf_token %}
+
+                                <div class="form-group mobile-selection">
+                                    <select name='plan' class='form-control plan' required>
+                                        <option required selected> -- Change Plan -- </option>
+                                        <option value="reseller">Reseller</option>
+                                    </select>
+                                </div>
+                                <p>Reseller Price is ₦{{website.reseller_price}}</p>
+                                <div class="container justify-content-center align-items-center">
+                                    <button type="submit"
+                                        class="btn btn-primary waves-effect waves-light w-100 purchase">Change</button>
+                                </div>
+                                {% comment %} <div class="text-center pt-4"><span id="img_loader"></span></div>
+                                {% endcomment %}
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <p class="text-muted font-weight-medium">Wallet Balance</p>
+                                <h4 class="mb-0">₦{{ wallet.amount|intcomma }}</h4>
+                            </div>
+
+                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                <span class="avatar-title">
+                                    <i class="fa fa-wallet font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <p class="text-muted font-weight-medium">Bonus</p>
+                                <h4 class="mb-0">₦{{ wallet.bonus|intcomma }}</h4>
+                            </div>
+
+                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                <span class="avatar-title rounded-circle bg-primary">
+                                    <i class="fas fa-coins font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <p class="text-muted font-weight-medium">Total Referred</p>
+                                <h4 class="mb-0">{{refers|length}}</h4>
+                            </div>
+
+                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                <span class="avatar-title rounded-circle bg-primary">
+                                    <i class="fas fa-users font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+        <div class="row">
+
+            <div class="mt-4 container">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Bank Automated Transfer</h4>
+                        <p class="card-title-desc">Kindly make transfer to any of the account number. <code
+                                class="highlighter-rouge">₦{{website.transfer_charges}} Charges will automatically be
+                                deducted.</code>
+                            <br> <span class="text-danger">Note: Your account will be credited automatically when we
+                                receive it.</span>
+                        </p>
+                        <ul class="nav nav-pills nav-center" role="tablist">
+                            {% for b in banks %}
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab"
+                                    href="#{{b.bank_slug}}" role="tab">
+                                    <span class="d-block d-sm-none">{{b.bank_name}}</span>
+                                    <span class="d-none d-sm-block">{{b.bank_name}}</span>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="tab-content">
+                            {% for b in banks %}
+                            <div class="tab-pane {% if forloop.first %} active{% endif %} mt-3" id="{{b.bank_slug}}"
+                                role="tabpanel">
+                                <div class="row card_ay bg-{{color_list|random}}">
+                                    <div class="card__front card__part">
+                                      <img class="card__front-square card__square" src="/static/images/logos/{{b.bank_slug}}.png">
+                                      <img class="card__front-logo card__logo" src="/static/images/logos/{{b.bank_slug}}.png">
+                                      <p class="card_numer">{{b.account_number}}</p>
+                                      <div class="card__space-75">
+                                        <span class="card__label">Bank</span>
+                                        <p class="card__info">{{b.bank_name}}</p>
+                                      </div>
+                                      <div class="card__space-25">
+                                        <span class="card__label">Account Name</span>
+                                        <p class="card__info">{{user.username}}</p>
+                                      </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{% if announcements %}
+<div class="row mx-4">
+    <div class="acme-news-ticker mb-3">
+    <div class="acme-news-ticker-label"><i class="fas fa-bullhorn"></i> Announcement</div>
+
+    <div class="acme-news-ticker-box">
+        <ul class="my-news-ticker-2">
+        {% for ann in announcements %}
+            <li>
+                <a href="#">*** {{ann.message}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+
+    </div>
+    <div class="acme-news-ticker-controls acme-news-ticker-horizontal-controls">
+        <span class="acme-news-ticker-pause"></span>
+    </div>
+</div>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="card p-3">
+            <div class="d-flex align-items-center">
+                <span class="stamp stamp-md text-{{color_list|random}} text-white mr-3">
+                    <i class="fas fa-history fa-2x"></i>
+                </span>
+                <div>
+                    <h5 class="mb-1"><b><a href="{% url 'trans' %}">Transactions</a></b></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        <div class="card p-3">
+            <div class="d-flex align-items-center">
+                <span class="stamp stamp-md text-{{color_list|random}} mr-3">
+                    <i class="fas fa-history fa-2x"></i>
+                </span>
+                <div>
+                    <h5 class="mb-1"><b><a href="{% url 'wall' %}"> Wallet summary</a></b></h5>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-dark bg-info-gradient text-white">
+                <div class="card-body bubble-shadow text-white">
+                    <h3 class="text-white">Notifications</h3>
+
+                    <h5 class="op-8 text-white"> {{notice.title}}</h5>
+
+                    <a href="{% url 'notif' %}" class="btn btn-info">All Messages</a>
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-dark bg-info-gradient">
+                <div class="card-body bubble-shadow">
+                    <h3 class="text-white">FAQs:</h3>
+                    <h5 class="op-9 text-white">Please go through them to have a better knowledge of this platform</h5>
+                    <a href="{% url 'faqs' %}" class="btn btn-info text-white">
+                        <i class="fas fa-question"></i> FAQs
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-dark bg-info-gradient">
+                <div class="card-body bubble-shadow">
+                    <h3 class="text-white">Support Team:</h3>
+                    <h5 class="op-9 text-white">Have anything to say to us? Please contact our Support Team on Whatsapp </h5>
+
+                    <a href="{{website.whatsapp_link}}" class="btn btn-success"> <i class="fab fa-whatsapp"></i>
+                        WhatsApp us</a>
+                    <br>
+                    <br>
+                    <a href="{{website.whatsapp_group_link}}" class="btn btn-success"> <i
+                            class="fab fa-whatsapp"></i> Join Our WhatsApp group</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'airtime' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/airtime.svg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Airtime TopUp</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'datas' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/data.jpg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Buy Data</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'airtimeCash' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/airtime2cash.jpg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Airtime to cash</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'meter_token' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/utility.jpg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Electricity Bills</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'tv_decoder' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/cable.jpg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Cable Subscription</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% comment %} <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{{ website.whatsapp_link }}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 10px;">
+                            <img src="/static/images/gift-card.webp" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Buy/Sell Gift Cards</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{{ website.whatsapp_link }}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 10px;">
+                            <img src="/static/images/eth.jpg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Buy/Sell Crypto</div>
+                    </div>
+                </div>
+            </a>
+        </div> {% endcomment %}
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'bonusWallet' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 10px;">
+                            <img src="/static/images/fundacc.jpg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Bonus to wallet</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        {% comment %} <div class="col-6 col-sm-4 col-lg-3">
+            <a href="/Bulk/">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/sms.png" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Bulk SMS</div>
+                    </div>
+                </div>
+            </a>
+        </div> {% endcomment %}
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'resultChecker' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/resultchecker.png" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Result Checker</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'card_print' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/printer.svg" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Recharge card Printing</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'referral' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/referral.png" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">My Referrals</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% comment %} <div class="col-6 col-sm-4 col-lg-3">
+            <a href="{% url 'set_pin' %}">
+                <div class="card">
+                    <div class="card-body p-3 text-center">
+                        <span style="font-size: 30px;">
+                            <img src="/static/images/referral.png" height="100px">
+                        </span>
+                        <div class="h4 m-2 text-dark">Update Transaction Pin</div>
+                    </div>
+                </div>
+            </a>
+        </div> {% endcomment %}
+    </div>
+
+</div>
+
+<script src="/static/libs/sweetalert2/sweetalert2.min.js"></script>
+<script>
+    Swal.fire("{{announcement.title}}", '{{announcement.message|safe}}');
+</script>
+{% endblock body %}

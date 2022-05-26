@@ -1,0 +1,54 @@
+{% extends "back/app.html" %}
+{% block title%}E-Pins | {{ website.website_name }}{% endblock title %}
+{% load humanize %}
+{% block app %}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">E-Pins</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'a_home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">E-Pins</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="container w-50 h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <h2 class="text-center">Add A New E-Pin </h2><br>
+            <form class="col-12 e_pin" id="e_pin" method="POST">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label class="form-label">Exams</label>
+                    <select name="exam" class="form-control">
+                        <option disabled selected>-- Select Exam --</option>
+                        <option value="WAEC">WAEC</option>
+                        <option value="NECO">NECO</option>
+                    </select>
+                </div>
+
+                <div class="form-floating mb-3 mb-lg-0">
+                    <input type="text" name="pins" class="form-control" id="floatingInput" placeholder="6772482742745272,7447548174518,445167416">
+                    <label for="floatingInput">Enter Pins, Separate by commas</label>
+                </div>
+                <div class="container justify-content-center align-items-center text-center mt-3">
+                    <button type="submit" class="btn btn-info btn-lg addPin">Add E-Pin<sup>s</sup></button>
+                </div>
+                {% comment %} <div class="text-center pt-4"><span id="img_loader"></span></div> {% endcomment %}
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+{% endblock app %}

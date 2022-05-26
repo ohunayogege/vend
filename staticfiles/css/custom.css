@@ -1,0 +1,17 @@
+#error{
+	height: auto;
+	padding: 5px;
+	font-size: 12px;
+}
+
+.valid{
+	/* border: 1px solid rgb(1, 65, 1);; */
+	/* background: rgb(1, 65, 1); */
+	color: rgb(1, 65, 1);
+}
+
+.invalid{
+	/* border: 1px solid red; */
+	/* background: red; */
+	color: red;
+}
