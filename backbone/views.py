@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from backbone.forms import EPinForm, StaffForm
 from backbone.models import APISetting, AirtimeCommission, AirtimeRequest, AirtimeToCashCalc, Announcement, BillsCommission, ContactList, DataCommission, DataSetting, ECardSettings, EPin, RechargeCard, ReferralSystem, WebsiteConfig
 from transactions.models import Transaction, WalletHistory
-from utils.api import TVBills
+from utils.api import TVBills, getUserDetail
 from utils.functions import Banks, gen_key, gen_ref_id, is_ajax
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, update_session_auth_hash, logout
@@ -29,10 +29,15 @@ def Home(request):
 	for exp in exps:
 		expense += exp.amount
 	users = User.objects.all().exclude(is_staff=True)
+	det = getUserDetail()
+	# print(det['data']['wallets'])
 	ctx = {
 		'users': len(users),
 		'income': income,
-		'expense': expense
+		'expense': expense,
+		'wallet_balance': det['data']['wallet_balance'],
+		'banks': det['data']['banks'],
+		"wallets": det['data']['wallets'],
 	}
 	return render(request, "back/home.html", ctx)
 
@@ -1059,26 +1064,10 @@ def ProductSettings(request):
 	}
 	if is_ajax(request=request):
 		# print(request.POST)
-		mtn_sme_is_active = request.POST.get("mtn_sme_is_active", None)
-		mtn_gifting_is_active = request.POST.get("mtn_gifting_is_active", None)
-		mtn_cg_is_active = request.POST.get("mtn_cg_is_active", None)
-		airtel_gifting_is_active = request.POST.get("airtel_gifting_is_active", None)
-		airtel_cg_is_active = request.POST.get("airtel_cg_is_active", None)
-		glo_gifting_is_active = request.POST.get("glo_gifting_is_active", None)
-		etisalat_gifting_is_active = request.POST.get("etisalat_gifting_is_active", None)
-		gift_sme = request.POST.get("gifting_and_sme", None)
-		corp_sme = request.POST.get("corporate_and_gifting", None)
 		dstv = request.POST.get("dstv_is_active", None)
 		gotv = request.POST.get("gotv_is_active", None)
 		startimes = request.POST.get("startimes_is_active", None)
 		disco = request.POST.get("disco_is_active", None)
-		pro.mtn_sme_is_active = False if mtn_sme_is_active == None else True
-		pro.mtn_gifting_is_active = False if mtn_gifting_is_active == None else True
-		pro.mtn_cg_is_active = False if mtn_cg_is_active == None else True
-		pro.airtel_gifting_is_active = False if airtel_gifting_is_active == None else True
-		pro.airtel_cg_is_active = False if airtel_cg_is_active == None else True
-		pro.glo_gifting_is_active = False if glo_gifting_is_active == None else True
-		pro.etisalat_gifting_is_active = False if etisalat_gifting_is_active == None else True
 		pro.dstv_is_active = False if dstv == None else True
 		pro.gotv_is_active = False if gotv == None else True
 		pro.startimes_is_active = False if startimes == None else True

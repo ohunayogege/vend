@@ -5,10 +5,11 @@ from backbone.models import APISetting
 
 api = APISetting.objects.last()
 sme_web = settings.SME_LINK
+sme_api = settings.SME_API
 def getUserDetail():
 	url = f"{sme_web}/extra/"
 	headers = {
-		"Authorization": f"Token {api.vtu_key}",
+		"Authorization": f"Token {sme_api}",
 		"Content-Type": "application/json"
 	}
 	x = requests.get(url, headers=headers)
@@ -138,7 +139,7 @@ def TVBills(decoder):
 	url = f"{sme_web}/cablesub/{decoder}"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	x = requests.get(url=url, headers=header)
 	return x.json()
@@ -147,7 +148,7 @@ def ValidateIUC(decoder, iuc):
 	url = f"{sme_web}/validate/iuc/"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"smart_card_number": iuc,
@@ -160,7 +161,7 @@ def PurchaseTV(decoder, iuc, variation_code, phone, amount, ref):
 	url = f"{sme_web}/cablesub/"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"ref": ref,
@@ -178,7 +179,7 @@ def ValidateDisco(disco, disco_type, iuc):
 	url = f"{sme_web}/validate/meter/"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"meter_number": iuc,
@@ -192,7 +193,7 @@ def PurchaseDisco(disco, disco_type, iuc, phone, amount, ref):
 	url = f"{sme_web}/billpayment/"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"meter_number": iuc,
@@ -208,7 +209,7 @@ def SmilePlan():
 	url = f"{sme_web}/service-variations?serviceID=smile-direct"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	x = requests.get(url=url, headers=header)
 	return x.json()
@@ -217,7 +218,7 @@ def PurchaseSmile(plan, phone, amount, ref):
 	url = f"{sme_web}/pay"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"request_id": ref,
@@ -233,7 +234,7 @@ def ValidateSmile(phone):
 	url = f"{sme_web}/merchant-verify/smile/phone"
 	header = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"billersCode": phone,
@@ -247,7 +248,7 @@ def fetchPlans():
 	url = f"{sme_web}/data/plans"
 	headers = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	x = requests.get(url, headers=headers)
 	return x.json()
@@ -256,7 +257,7 @@ def purchaseAirtime(amount, network, mobile, ref):
 	url = f"{sme_web}/topup/"
 	headers = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"network": network,
@@ -272,7 +273,7 @@ def purchaseData(plan, network, mobile, ref):
 	url = f"{sme_web}/data/"
 	headers = {
 		"Content-Type": "application/json",
-		"Authorization": f"Token {api.vtu_key}"
+		"Authorization": f"Token {sme_api}"
 	}
 	datum = {
 		"network": 1 if network == 'mtn' else 2 if network == 'airtel' else 3 if network == '9mobile' else 4,

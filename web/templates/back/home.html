@@ -83,13 +83,13 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-8">
-                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Profit Ration</span>
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">API Balance</span>
                         <h4 class="mb-3">
-                            <span class="counter-value" data-target="12.57">0</span>%
+                            ₦<span>{{wallet_balance|intcomma}}</span>
                         </h4>
                     </div>
                     <div class="col-4">
-                        <div id="mini-chart4" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                        {% comment %} <div id="mini-chart4" data-colors='["#5156be"]' class="apex-charts mb-2"></div> {% endcomment %}
                     </div>
                 </div>
                 <div class="text-nowrap">
@@ -100,6 +100,87 @@
         </div><!-- end card -->
     </div><!-- end col -->    
 </div><!-- end row-->
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Fund Wallet</h4>
+            <p class="card-title-desc">Use the following account details to fund your API Balance.</p>
+        </div><!-- end card header -->
+        
+        <div class="card-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills nav-justified" role="tablist">
+            {% for b in banks %}
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link {% if forloop.first %}active{% endif %}" data-bs-toggle="tab" href="#{{b.bank_slug}}" role="tab" aria-selected="true">
+                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                        <span class="d-none d-sm-block">{{b.bank_name}}</span>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content p-3 text-muted">
+                {% for b in banks %}
+                <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{b.bank_slug}}" role="tabpanel">
+                    <div class="mb-0 row">
+                        <div class="col-4">{{b.account_number}}</div>
+                        <div class="col-4">{{b.account_name}}</div>
+                        <div class="col-4">{{b.bank_name}}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div><!-- end card-body -->
+    </div><!-- end card -->
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Wallet Fund History</h4>
+                <p class="card-title-desc">
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Amount</th>
+                        <th>Amount Before</th>
+                        <th>Amount After</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        {% comment %} <th>Action</th> {% endcomment %}
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for w in wallets %}
+                    <tr>
+                        <td>{{w.reference}}</td>
+                        <td>₦{{w.amount|intcomma}}</td>
+                        <td>₦{{w.amount_before|intcomma}}</td>
+                        <td>₦{{w.amount_after|intcomma}}</td>
+                        <td>{{w.date|date}}</td>
+                        <td>{{w.status|capfirst}}</td>
+                    </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div> <!-- end row -->
 
 <div class="row">
     <div class="col-xl-5">

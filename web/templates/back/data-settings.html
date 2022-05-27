@@ -31,7 +31,7 @@
             <div class="card-body p-4">
                 <form class="product_config">
                 {% csrf_token %}
-                    <div class="row">
+                    {% comment %} <div class="row">
                         <h4 class="card-title">Data Settings</h4>
                         <div class="col-lg-3">
                             <div>
@@ -103,7 +103,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> {% endcomment %}
 
                     <div class="row">
                         <h4 class="card-title mt-3">Bills Settings</h4>
