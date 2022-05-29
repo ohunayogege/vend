@@ -100,7 +100,7 @@
                         <span data-key="t-email">Products Setting</span>
                     </a>
                     <ul class="sub-menu mm-collapse" aria-expanded="false">
-                        <li><a href="{% url 'product_set' %}" data-key="t-inbox">Product Settings</a></li>
+                        {% comment %} <li><a href="{% url 'product_set' %}" data-key="t-inbox">Product Settings</a></li> {% endcomment %}
                         <li><a href="{% url 'airtime_set' %}" data-key="t-read-email">Airtime Commission</a></li>
                         <li><a href="{% url 'bills_set' %}" data-key="t-read-email">Disco Commission</a></li>
                     </ul>
@@ -233,7 +233,7 @@
 
             </ul>
 
-            <div class="card sidebar-alert border-0 text-center mx-4 mb-0 mt-5">
+            {% comment %} <div class="card sidebar-alert border-0 text-center mx-4 mb-0 mt-5">
                 <div class="card-body">
                     <img src="/static/assets/images/giftbox.png" alt="">
                     <div class="mt-4">
@@ -242,7 +242,7 @@
                         <a href="https://prudentcoreng.com" class="btn btn-primary mt-2" target="_blank" rel="follow">Visit Now</a>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
         </div>
         <!-- Sidebar -->
     </div>
