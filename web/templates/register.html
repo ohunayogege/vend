@@ -63,14 +63,12 @@
                                                 <label for="useremail">Email</label>
                                                 <input type="email" class="form-control" name="email" placeholder="Enter email" autocomplete="new-email" required>        
                                             </div>
+                                            {% if ref %}
                                             <div class="col form-group">
                                                 <label for="username">Referral Code <small>(Optional)</small></label>
-                                                {% if ref == None %}
-                                                <input type="text" class="form-control" name="referral" placeholder="Referral Code">
-                                                {% else %}
-                                                <input type="text" class="form-control" name="referral" value="{{ref}}" placeholder="Referral Code" autocomplete="new-ref" readonly>
-                                                {% endif %}
+                                                <input type="text" class="form-control" name="referral" value="{{ref}}" autocomplete="new-ref" placeholder="Referral Code" readonly>
                                             </div>
+                                            {% endif %}
                                         </div>
                 
                                         <div class="row">

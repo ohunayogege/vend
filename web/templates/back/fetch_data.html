@@ -40,7 +40,7 @@
                                 <th>Customer Price</th>
                                 <th>Reseller Price</th>
                                 {% comment %} <th>Vendor Price</th> {% endcomment %}
-                                <th>API Price</th>
+                                {% comment %} <th>API Price</th> {% endcomment %}
                                 <th>Edit</th>
                             </tr>
                         </thead>
@@ -49,13 +49,11 @@
                             <tr data-id="{{n.id}}">
                                 <td data-field="pid" style="width: 30px">{{n.id}}</td>
                                 <td data-field="network">{{network}}</td>
-                                <td data-field="plan">{{n.name}}</td>
-                                <td data-field="data_type"></td>
-                                <td data-field="amount">{{n.price}}</td>
-                                <td data-field="customer_price">{{n.price}}</td>
-                                <td data-field="reseller_price">{{n.price}}</td>
-                                {% comment %} <td data-field="vendor_price">{{n.price}}</td> {% endcomment %}
-                                <td data-field="api_price">{{n.price}}</td>
+                                <td data-field="plan">{{n.plan}}</td>
+                                <td data-field="data_type">{{n.plan_type}}</td>
+                                <td data-field="amount">{{n.amount}}</td>
+                                <td data-field="customer_price">{{n.amount}}</td>
+                                <td data-field="reseller_price">{{n.amount}}</td>
                                 <td style="width: 100px">
                                     <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>

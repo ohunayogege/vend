@@ -5,7 +5,7 @@ from backbone.views import A2CSettings, APISettings, APIUsers, AddAdmin, AddCont
     Contacts, DataPlug, DataSettings, DelAnn, DelContact, DelECard, DelEPin, DelReq, DelStaff, DelTransaction, DelUser, DelWTransaction,\
     ECards, EPinSettings, EPins, Home, Login, LogoSettings, Logout, DeleteUsedCard, NetworkSet, ProductSettings, ReferralSettings, Resellers,\
     SEOSettings, TransactionDetail, Transactions, UserProfile, Users, WalletTransaction, WalletTransactions, Webhook, WebsiteDetails,\
-    fetchCablePlug, DeleteData, myProfile, updateUserWallet
+    fetchCablePlug, DeleteData, fetchDataPlug, myProfile, updateUserWallet
 
 urlpatterns = [
     _(r'^$', Home, name="a_home"),
@@ -64,7 +64,7 @@ urlpatterns = [
     _(r'^networks\/?$', NetworkSet, name="a_networks"),
     _(r'^dataplans/(?P<net>[\w-]+)\/?$', DataPlug, name="a_data_plans"),
     _(r'^delete-plans/(?P<net>[\w-]+)/(?P<pid>[\w-]+)\/?$', DeleteData, name="a_data_plans_del"),
-    # _(r'^fetchplans/(?P<net>[\w-]+)\/?$', fetchDataPlug, name="a_data_plans_fetch"),
+    _(r'^fetchplans/(?P<net>[\w-]+)\/?$', fetchDataPlug, name="a_data_plans_fetch"),
 
     _(r'^cableplugs/(?P<decoder>[\w-]+)\/?$', CablePlug, name="a_cables"),
     _(r'^fetchcable/(?P<decoder>[\w-]+)\/?$', fetchCablePlug, name="a_cable_fetch"),

@@ -244,8 +244,8 @@ def ValidateSmile(phone):
 	return x.json()
 
 
-def fetchPlans():
-	url = f"{sme_web}/data/plans"
+def fetchPlans(net):
+	url = f"{sme_web}/fetch-data/{net}"
 	headers = {
 		"Content-Type": "application/json",
 		"Authorization": f"Token {sme_api}"

@@ -26,59 +26,7 @@
                 
             </div>
             <div>
-                <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bx bx-plus me-1"></i> Add Plan</button>
-            </div>
-            <!-- Static Backdrop Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Add New Data Plan</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form class="addingPlan" method="POST">
-                        <div class="modal-body">
-                                {% csrf_token %}
-                                <div class="form-group mb-3">
-                                    <label>Network</label>
-                                    <input type="text" class="form-control" name="network" value="{{network|upper}}" readonly>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Plan ID</label>
-                                    <input type="text" class="form-control" name="plan_id" placeholder="92">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Data Plan</label>
-                                    <input type="text" class="form-control" name="plan" placeholder="10GB - 1 month">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Data Plan Type</label>
-                                    <input type="text" class="form-control" name="plan_type" placeholder="DIRECCT" oninput="this.value = this.value.toUpperCase()" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Amount</label>
-                                    <input type="text" name="amount" class="form-control" placeholder="50">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Customer Price</label>
-                                    <input type="text" class="form-control" name="customer_price" placeholder="100">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Reseller Price</label>
-                                    <input type="text" class="form-control" name="reseller_price" placeholder="200">
-                                </div>
-                                {% comment %} <div class="form-group mb-3">
-                                    <label>API Price</label>
-                                    <input type="text" class="form-control" placeholder="300" name="api_price">
-                                </div> {% endcomment %}
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
+                <a href="{% url 'a_data_plans_fetch' network %}" class="btn btn-primary waves-effect waves-light"><i class="bx bx-plus me-1"></i> Fetch Plans</a>
             </div>
         </div>
     </div>

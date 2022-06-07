@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from backbone.forms import EPinForm, StaffForm
 from backbone.models import APISetting, AirtimeCommission, AirtimeRequest, AirtimeToCashCalc, Announcement, BillsCommission, ContactList, DataCommission, DataSetting, ECardSettings, EPin, RechargeCard, ReferralSystem, WebsiteConfig
 from transactions.models import Transaction, WalletHistory
-from utils.api import TVBills, getUserDetail
+from utils.api import TVBills, fetchPlans, getUserDetail
 from utils.functions import Banks, gen_key, gen_ref_id, is_ajax
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, update_session_auth_hash, logout
@@ -977,6 +977,42 @@ def DataPlug(request, net=None):
 		)
 		return redirect("a_data_plans", net)
 	return render(request, "back/data-plans.html", ctx)
+
+def fetchDataPlug(request, net=None):
+	if request.user.is_authenticated == False:
+		return redirect("a_login")
+	if request.user.is_authenticated and request.user.is_staff == False:
+		logout(request)
+		return redirect("a_login")
+	if net == None:
+		return redirect("a_home")
+	else:
+		plans = fetchPlans(net)
+		plan = plans['data']
+		net = net
+	
+	if is_ajax(request=request):
+		netw = NetworkList.objects.get(slug=request.GET['network'].lower())
+		check_plan = DataPlan.objects.filter(pid=request.GET['pid']).exists()
+		if check_plan == True:
+			msg = {"status": False, "message": "Data Plan already exists. Please choose another."}
+			return JsonResponse(msg)
+		DataPlan.objects.create(
+			pid=request.GET['pid'],
+			network=netw,
+			plan=request.GET['plan'],
+			plan_type=request.GET['data_type'],
+			amount=request.GET['amount'],
+			customer_price=request.GET['customer_price'],
+			reseller_user_price=request.GET['reseller_price'],
+		)
+		msg = {"status": True, "message": "Successfully added."}
+		return JsonResponse(msg)
+	ctx = {
+		"plans": plan,
+		"network": net
+	}
+	return render(request, "back/fetch_data.html", ctx)
 
 def DeleteData(request, net=None, pid=None):
 	dt = DataPlan.objects.filter(id=pid).delete()
